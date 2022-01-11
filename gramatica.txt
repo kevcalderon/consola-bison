@@ -1,0 +1,145 @@
+inicio: instruccion
+;
+
+//INSTRUCCIONES DE LA CONSOLA
+
+instruccion: mkdisk
+|rmdisk
+|fdisk
+|mount
+|unmount
+|mkfs
+|login
+|logout
+|mkgrp
+|rmgrp
+|mkusr  
+|rmuser
+|chmod
+|touch
+|cat
+|rm
+|edit
+|ren
+|mkdir
+|cp
+|mv
+|find
+|chown
+|chgrp
+|recovery
+|loss
+|exec
+;
+
+mkdisk:             TOK_MKDISK paramslist TOK_SALTO
+;
+
+rmdisk:             TOK_RMDISK paramslist TOK_SALTO
+;
+
+fdisk:              TOK_FDISK paramslist TOK_SALTO
+;
+
+mount:              TOK_MOUNT paramslist TOK_SALTO
+;
+
+unmount:            TOK_UNMOUNT paramslist TOK_SALTO
+;
+
+mkfs:               TOK_MKFS paramslist TOK_SALTO
+;
+
+login:              TOK_LOGIN paramslist TOK_SALTO
+;
+
+logout:             TOK_LOGOUT
+;
+
+mkgrp:              TOK_MKGRP paramslist TOK_SALTO
+;
+
+rmgrp:              TOK_RMGRP paramslist TOK_SALTO
+;
+
+mkusr:              TOK_MKUSR paramslist TOK_SALTO
+;
+
+rmusr:              TOK_RMUSR paramslist TOK_SALTO
+;
+
+chmod:              TOK_CHMOD paramslist TOK_SALTO
+;
+
+touch:              TOK_TOUCH paramslist TOK_SALTO
+;
+
+cat:                TOK_CAT paramslist TOK_SALTO
+;
+
+rm:                 TOK_RM paramslist TOK_SALTO
+;
+
+edit:               TOK_EDIT paramslist TOK_SALTO
+;
+
+ren:                TOK_REN paramslist TOK_SALTO
+;
+
+mkdir:              TOK_MKDIR paramslist TOK_SALTO
+;
+
+cp:                 TOK_CP paramslist TOK_SALTO
+;
+
+mv:                 TOK_MV paramslist TOK_SALTO
+;
+
+find:               TOK_FIND paramslist TOK_SALTO
+;
+
+chown:              TOK_CHOWN paramslist TOK_SALTO
+;
+
+chgrp:              TOK_CHGRP paramslist TOK_SALTO
+;
+
+recovery:           TOK_RECOVERY paramslist TOK_SALTO
+;
+
+loss:               TOK_LOSS paramslist TOK_SALTO
+;
+
+exec:               TOK_EXEC paramslist TOK_SALTO
+;
+
+paramslist:         params paramslist
+                    |params
+;
+
+params:             TOK_PATH TOK_IGUAL TOK_RUTA
+                    |TOK_SIZE TOK_IGUAL TOK_NUMERO
+                    |TOK_U TOK_IGUAL TOK_UNIDADES
+                    |TOK_F TOK_IGUAL TOK_AJUSTE
+                    |TOK_NAME TOK_IGUAL TOK_NOMBRE
+                    |TOK_TYPE TOK_IGUAL TOK_TIPO
+                    |TOK_DELETE TOK_IGUAL TOK_CAPACIDAD
+                    |TOK_ADD TOK_IGUAL TOK_NUMERO
+                    |TOK_ID TOK_IGUAL TOK_IDENTIFICADOR
+                    |TOK_TYPE TOK_IGUAL TOK_CAPACIDAD
+                    |TOK_FS TOK_IGUAL TOK_SISTEMA
+                    |TOK_USR TOK_IGUAL TOK_NOMBRE
+                    |TOK_PWD TOK_IGUAL TOK_NOMBRE   
+                    |TOK_GPR TOK_IGUAL TOK_NOMBRE
+                    |TOK_UGO TOK_IGUAL TOK_PERMISOS
+                    |TOK_R
+                    |TOK_P 
+                    |TOK_STDIN
+                    |TOK_CONT TOK_IGUAL TOK_RUTA
+                    |TOK_DEST TOK_IGUAL TOK_RUTA
+                    |filen
+;
+
+filen:              TOK_FILEN TOK_IGUAL TOK_RUTA filen
+                    |TOK_FILEN TOK_IGUAL TOK_RUTA
+; 
