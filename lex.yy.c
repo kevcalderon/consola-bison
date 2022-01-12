@@ -1156,7 +1156,7 @@ YY_RULE_SETUP
 case 51:
 YY_RULE_SETUP
 #line 132 "calc.l"
-{yylval.numero = atoi(yytext);
+{yylval.numero = strdup(yytext);
                  return TOK_NUMERO;}
 	YY_BREAK
 case 52:

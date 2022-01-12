@@ -252,7 +252,7 @@ union YYSTYPE
 {
 #line 6 "calc.y"
 
-    int numero;
+    char *numero;
     char *ajuste;
     char *ruta;
     char *unidades;
@@ -1527,7 +1527,7 @@ yyreduce:
     {
   case 2:
 #line 87 "calc.y"
-                      { printf("%s\n el comando funciona");}
+                      { printf("el comando funciona");}
 #line 1532 "y.tab.c"
     break;
 

@@ -1,1 +1,2 @@
-mkdisk -size=3000 -u=K -path=/home/user fav/Disco1.dk
+Mkdisk -path=/home/user/Disco2.dk -size=3000 -U=K
+

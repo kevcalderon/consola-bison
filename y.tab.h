@@ -181,7 +181,7 @@ union YYSTYPE
 {
 #line 6 "calc.y"
 
-    int numero;
+    char *numero;
     char *ajuste;
     char *ruta;
     char *unidades;

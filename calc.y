@@ -4,7 +4,7 @@ extern FILE *yyin;
 
 %}
 %union{
-    int numero;
+    char *numero;
     char *ajuste;
     char *ruta;
     char *unidades;
@@ -84,7 +84,7 @@ extern FILE *yyin;
 
 
 %%
-inicio:   instruccion { printf("%s\n el comando funciona");}
+inicio:   instruccion { printf("el comando funciona");}
 ;
 
 instruccion: TOK_MKDISK paramslist TOK_SALTO

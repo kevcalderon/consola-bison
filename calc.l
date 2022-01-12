@@ -129,7 +129,7 @@ salto           "\n"
 {interrogacion}        {return TOK_INTERROGACION;}
 {cerradura}        {return TOK_CERRADURA;}
 {permisos}        {yylval.permisos = strdup(yytext); return TOK_PERMISOS;}
-{numero}        {yylval.numero = atoi(yytext);
+{numero}        {yylval.numero = strdup(yytext);
                  return TOK_NUMERO;}
 {ajuste}        {yylval.ajuste = strdup(yytext); return TOK_AJUSTE;}
 {unidades}        {yylval.unidades = strdup(yytext); return TOK_UNIDADES;}
@@ -144,7 +144,7 @@ salto           "\n"
 {blanco}        ;
                  
 
-
+ 
 .               {printf("ERROR LEXICO\n");
                  return TOK_ERROR;}
 
