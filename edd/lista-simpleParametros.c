@@ -3,63 +3,67 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
-#include "../structs/Comando.h"
+
+typedef struct parametros{
+    char *nombre;
+    char *valor;
+    struct parametros *siguiente;
+}NodoParametro;
+
+typedef struct paramList{
+    int tamano;
+    NodoParametro* primerItem;
+    NodoParametro* ultimoItem;
+}ListaParametros;
  
- typedef struct paramList{
-     int tamano;
-     NodoParametro* primerItem;
-     NodoParametro* ultimoItem;
- }ListaLigada;
+NodoParametro* getNodeParametros(char *nombre, char *valor){
+    NodoParametro* nodo = (NodoParametro*)malloc(sizeof(NodoParametro));
+    nodo->nombre = nombre;
+    nodo->valor= valor;
+    nodo->siguiente = NULL;
+    return nodo;
+}
  
- NodoParametro* getNode(char *nombre, char *valor){
-     NodoParametro* nodo = (NodoParametro*)malloc(sizeof(NodoParametro));
-     nodo->nombre = nombre;
-     nodo->valor= valor;
-     nodo->siguiente = NULL;
-     return nodo;
- }
- 
- ListaLigada* obtenerNuevaListaLigada(){
-     ListaLigada* ll = (ListaLigada*)malloc(sizeof(ListaLigada));
-     ll->tamano=0;
-     ll->primerItem = NULL;
-     ll->ultimoItem = NULL;
-     return ll;
- }
+ListaParametros* obtenerNuevaListaParametros(){
+    ListaParametros* ll = (ListaParametros*)malloc(sizeof(ListaParametros));
+    ll->tamano=0;
+    ll->primerItem = NULL;
+    ll->ultimoItem = NULL;
+    return ll;
+}
  
  //* Operaciones CRUD
  
- void add(ListaLigada* ll,NodoParametro* nodo){
+void addParametros(ListaParametros* ll,NodoParametro* nodo){
     if (ll->primerItem == NULL) ll->primerItem = nodo;
     else ll->ultimoItem->siguiente = nodo;
     ll->ultimoItem = nodo;
     ll->tamano++;
- }
+}
  
- void read(ListaLigada* ll){
-        NodoParametro* exploradorLista = ll->primerItem;
-        int i = 0;
-        while (exploradorLista != NULL){
-            printf("%s\n", exploradorLista->nombre);
-            exploradorLista = exploradorLista->siguiente;
-            
-        }
- }
+void readParametros(ListaParametros* ll){
+    NodoParametro* exploradorLista = ll->primerItem;
+    while (exploradorLista != NULL){
+        printf("%s\n", exploradorLista->nombre);
+        exploradorLista = exploradorLista->siguiente;
+        
+    }
+}
 
-  bool search(ListaLigada* ll, char *token){
-        NodoParametro* exploradorLista = ll->primerItem;
-        bool bandera = false;
-        while (exploradorLista != NULL){
-            if(token == exploradorLista->nombre){
-                //printf("%s\n", exploradorLista->nombre);
-                bandera = true;
-            }
-            exploradorLista = exploradorLista->siguiente;
+bool searchParametros(ListaParametros* ll, char *token){
+    NodoParametro* exploradorLista = ll->primerItem;
+    bool bandera = false;
+    while (exploradorLista != NULL){
+        if(token == exploradorLista->nombre){
+            //printf("%s\n", exploradorLista->nombre);
+            bandera = true;
         }
-        return bandera;
- }
+        exploradorLista = exploradorLista->siguiente;
+    }
+    return bandera;
+}
  
- /*void update(ListaLigada* ll, unsigned int indice, int nuevoValor){
+ /*void update(ListaParametros* ll, unsigned int indice, int nuevoValor){
      if (ll->tamano && indice<ll->tamano){
          Nodo* exploradorLista = ll->primerItem;
          int i = 0;
@@ -69,7 +73,7 @@
      }
  }
  
-void removed(ListaLigada* ll, unsigned int indice){
+void removed(ListaParametros* ll, unsigned int indice){
      if (ll->tamano && indice<ll->tamano){
          Nodo* aux;
          if (indice == 0){
@@ -95,7 +99,7 @@ void removed(ListaLigada* ll, unsigned int indice){
  
  int main(){
  
-     ListaLigada* LISTA = obtenerNuevaListaLigada();
+     ListaParametros* LISTA = obtenerNuevaListaParametros();
      NodoParametro* a = getNode("-size", "3000");
      NodoParametro* b = getNode("-u", "-k");
 

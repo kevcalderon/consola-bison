@@ -1,2 +1,1 @@
 Mkdisk -path=/home/user/Disco2.dk -size=3000 -U=K
-

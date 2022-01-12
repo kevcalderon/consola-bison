@@ -1,5 +1,8 @@
 %{
 #include <stdio.h>
+#include "edd/lista-simpleComando.c"
+#include "edd/lista-simpleParametros.c"
+
 extern FILE *yyin;
 
 %}
@@ -87,61 +90,161 @@ extern FILE *yyin;
 inicio:   instruccion { printf("el comando funciona");}
 ;
 
-instruccion: TOK_MKDISK paramslist TOK_SALTO
-|TOK_RMDISK paramslist TOK_SALTO
-|TOK_FDISK paramslist TOK_SALTO
-|TOK_MOUNT paramslist TOK_SALTO
-|TOK_UNMOUNT paramslist TOK_SALTO
-|TOK_MKFS paramslist TOK_SALTO
-|TOK_LOGIN paramslist TOK_SALTO
-|TOK_LOGOUT
-|TOK_MKGRP paramslist TOK_SALTO
-|TOK_RMGRP paramslist TOK_SALTO
-|TOK_MKUSR paramslist TOK_SALTO  
-|TOK_RMUSR paramslist TOK_SALTO
-|TOK_CHMOD paramslist TOK_SALTO
-|TOK_TOUCH paramslist TOK_SALTO
-|TOK_CAT paramslist TOK_SALTO
-|TOK_RM paramslist TOK_SALTO
-|TOK_EDIT paramslist TOK_SALTO
-|TOK_REN paramslist TOK_SALTO
-|TOK_MKDIR paramslist TOK_SALTO
-|TOK_CP paramslist TOK_SALTO
-|TOK_MV paramslist TOK_SALTO
-|TOK_FIND paramslist TOK_SALTO
-|TOK_CHOWN paramslist TOK_SALTO
-|TOK_CHGRP paramslist TOK_SALTO
-|TOK_RECOVERY paramslist TOK_SALTO
-|TOK_LOSS paramslist TOK_SALTO
-|TOK_EXEC paramslist TOK_SALTO
+instruccion:        TOK_MKDISK paramslist TOK_SALTO{
+
+                    }
+                    |TOK_RMDISK paramslist TOK_SALTO{
+
+                    }
+                    |TOK_FDISK paramslist TOK_SALTO{
+
+                    }
+                    |TOK_MOUNT paramslist TOK_SALTO{
+
+                    }
+                    |TOK_UNMOUNT paramslist TOK_SALTO{
+
+                    }
+                    |TOK_MKFS paramslist TOK_SALTO{
+
+                    }
+                    |TOK_LOGIN paramslist TOK_SALTO{
+
+                    }
+                    |TOK_LOGOUT{
+
+                    }
+                    |TOK_MKGRP paramslist TOK_SALTO{
+
+                    }
+                    |TOK_RMGRP paramslist TOK_SALTO{
+
+                    }
+                    |TOK_MKUSR paramslist TOK_SALTO{
+
+                    }  
+                    |TOK_RMUSR paramslist TOK_SALTO{
+
+                    }
+                    |TOK_CHMOD paramslist TOK_SALTO{
+
+                    }
+                    |TOK_TOUCH paramslist TOK_SALTO{
+
+                    }
+                    |TOK_CAT paramslist TOK_SALTO{
+
+                    }
+                    |TOK_RM paramslist TOK_SALTO{
+
+                    }
+                    |TOK_EDIT paramslist TOK_SALTO{
+
+                    }
+                    |TOK_REN paramslist TOK_SALTO{
+
+                    }
+                    |TOK_MKDIR paramslist TOK_SALTO{
+
+                    }
+                    |TOK_CP paramslist TOK_SALTO{
+
+                    }
+                    |TOK_MV paramslist TOK_SALTO{
+
+                    }
+                    |TOK_FIND paramslist TOK_SALTO{
+
+                    }
+                    |TOK_CHOWN paramslist TOK_SALTO{
+
+                    }
+                    |TOK_CHGRP paramslist TOK_SALTO{
+
+                    }
+                    |TOK_RECOVERY paramslist TOK_SALTO{
+
+                    }
+                    |TOK_LOSS paramslist TOK_SALTO{
+
+                    }
+                    |TOK_EXEC paramslist TOK_SALTO{
+
+                    }
 ;
 
 
-paramslist:         params paramslist
-                    |params
+paramslist:         params paramslist{
+
+                    }
+                    |params{
+
+                    }
 ;
 
-params:             TOK_PATH TOK_IGUAL TOK_RUTA
-                    |TOK_SIZE TOK_IGUAL TOK_NUMERO
-                    |TOK_U TOK_IGUAL TOK_UNIDADES
-                    |TOK_F TOK_IGUAL TOK_AJUSTE
-                    |TOK_NAME TOK_IGUAL TOK_NOMBRE
-                    |TOK_TYPE TOK_IGUAL TOK_TIPO
-                    |TOK_DELETE TOK_IGUAL TOK_CAPACIDAD
-                    |TOK_ADD TOK_IGUAL TOK_NUMERO
-                    |TOK_ID TOK_IGUAL TOK_IDENTIFICADOR
-                    |TOK_TYPE TOK_IGUAL TOK_CAPACIDAD
-                    |TOK_FS TOK_IGUAL TOK_SISTEMA
-                    |TOK_USR TOK_IGUAL TOK_NOMBRE
-                    |TOK_PWD TOK_IGUAL TOK_NOMBRE   
-                    |TOK_GRP TOK_IGUAL TOK_NOMBRE
-                    |TOK_UGO TOK_IGUAL TOK_PERMISOS
-                    |TOK_R
-                    |TOK_P 
-                    |TOK_STDIN
-                    |TOK_CONT TOK_IGUAL TOK_RUTA
-                    |TOK_DEST TOK_IGUAL TOK_RUTA
-                    |TOK_FILEN TOK_IGUAL TOK_RUTA 
+params:             TOK_PATH TOK_IGUAL TOK_RUTA{
+
+                    }
+                    |TOK_SIZE TOK_IGUAL TOK_NUMERO{
+
+                    }
+                    |TOK_U TOK_IGUAL TOK_UNIDADES{
+
+                    }
+                    |TOK_F TOK_IGUAL TOK_AJUSTE{
+
+                    }
+                    |TOK_NAME TOK_IGUAL TOK_NOMBRE{
+
+                    }
+                    |TOK_TYPE TOK_IGUAL TOK_TIPO{
+
+                    }
+                    |TOK_DELETE TOK_IGUAL TOK_CAPACIDAD{
+
+                    }
+                    |TOK_ADD TOK_IGUAL TOK_NUMERO{
+
+                    }
+                    |TOK_ID TOK_IGUAL TOK_IDENTIFICADOR{
+
+                    }
+                    |TOK_TYPE TOK_IGUAL TOK_CAPACIDAD{
+
+                    }
+                    |TOK_FS TOK_IGUAL TOK_SISTEMA{
+
+                    }
+                    |TOK_USR TOK_IGUAL TOK_NOMBRE{
+
+                    }
+                    |TOK_PWD TOK_IGUAL TOK_NOMBRE{
+
+                    }  
+                    |TOK_GRP TOK_IGUAL TOK_NOMBRE{
+
+                    }
+                    |TOK_UGO TOK_IGUAL TOK_PERMISOS{
+
+                    }
+                    |TOK_R{
+
+                    }
+                    |TOK_P{
+
+                    }
+                    |TOK_STDIN{
+
+                    }
+                    |TOK_CONT TOK_IGUAL TOK_RUTA{
+
+                    }
+                    |TOK_DEST TOK_IGUAL TOK_RUTA{
+
+                    }
+                    |TOK_FILEN TOK_IGUAL TOK_RUTA{
+
+                    }
 ;
 
 
