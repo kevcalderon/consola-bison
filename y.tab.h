@@ -179,8 +179,10 @@ extern int yydebug;
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 9 "calc.y"
+#line 13 "calc.y"
 
+    char *comando;
+    char *parametro;
     char *numero;
     char *ajuste;
     char *ruta;
@@ -191,8 +193,12 @@ union YYSTYPE
     char *sistema;
     char *permisos;
     char *identificador;
+    struct NodoParametro *paramNode;
+    struct NodoComando *comandNode;
+    struct ListaComandos *comandList;
+    struct ListaParametros *paramList;
 
-#line 196 "y.tab.h"
+#line 202 "y.tab.h"
 
 };
 typedef union YYSTYPE YYSTYPE;

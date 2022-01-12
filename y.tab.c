@@ -74,8 +74,12 @@
 
 extern FILE *yyin;
 
+//INSTANCIAR LAS LISTAS
 
-#line 79 "y.tab.c"
+#define LISTACOMANDS obtenerNuevaListaComandos();
+
+
+#line 83 "y.tab.c"
 
 # ifndef YY_CAST
 #  ifdef __cplusplus
@@ -253,8 +257,10 @@ extern int yydebug;
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 9 "calc.y"
+#line 13 "calc.y"
 
+    char *comando;
+    char *parametro;
     char *numero;
     char *ajuste;
     char *ruta;
@@ -265,8 +271,12 @@ union YYSTYPE
     char *sistema;
     char *permisos;
     char *identificador;
+    struct NodoParametro *paramNode;
+    struct NodoComando *comandNode;
+    struct ListaComandos *comandList;
+    struct ListaParametros *paramList;
 
-#line 270 "y.tab.c"
+#line 280 "y.tab.c"
 
 };
 typedef union YYSTYPE YYSTYPE;
@@ -645,14 +655,14 @@ static const yytype_int8 yytranslate[] =
 
 #if YYDEBUG
   /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
-static const yytype_uint8 yyrline[] =
+static const yytype_int16 yyrline[] =
 {
-       0,    90,    90,    93,    96,    99,   102,   105,   108,   111,
-     114,   117,   120,   123,   126,   129,   132,   135,   138,   141,
-     144,   147,   150,   153,   156,   159,   162,   165,   168,   171,
-     177,   180,   185,   188,   191,   194,   197,   200,   203,   206,
-     209,   212,   215,   218,   221,   224,   227,   230,   233,   236,
-     239,   242,   245
+       0,   103,   103,   106,   109,   112,   115,   118,   121,   124,
+     127,   130,   133,   136,   139,   142,   145,   148,   151,   154,
+     157,   160,   163,   166,   169,   172,   175,   178,   181,   184,
+     190,   195,   202,   205,   208,   211,   214,   217,   220,   223,
+     226,   229,   232,   235,   238,   241,   244,   247,   250,   253,
+     256,   259,   262
 };
 #endif
 
@@ -1529,413 +1539,417 @@ yyreduce:
   switch (yyn)
     {
   case 2:
-#line 90 "calc.y"
+#line 103 "calc.y"
                       { printf("el comando funciona");}
-#line 1535 "y.tab.c"
+#line 1545 "y.tab.c"
     break;
 
   case 3:
-#line 93 "calc.y"
+#line 106 "calc.y"
                                                    {
 
                     }
-#line 1543 "y.tab.c"
+#line 1553 "y.tab.c"
     break;
 
   case 4:
-#line 96 "calc.y"
+#line 109 "calc.y"
                                                     {
 
                     }
-#line 1551 "y.tab.c"
+#line 1561 "y.tab.c"
     break;
 
   case 5:
-#line 99 "calc.y"
+#line 112 "calc.y"
                                                    {
 
                     }
-#line 1559 "y.tab.c"
+#line 1569 "y.tab.c"
     break;
 
   case 6:
-#line 102 "calc.y"
+#line 115 "calc.y"
                                                    {
 
                     }
-#line 1567 "y.tab.c"
+#line 1577 "y.tab.c"
     break;
 
   case 7:
-#line 105 "calc.y"
+#line 118 "calc.y"
                                                      {
 
                     }
-#line 1575 "y.tab.c"
+#line 1585 "y.tab.c"
     break;
 
   case 8:
-#line 108 "calc.y"
+#line 121 "calc.y"
                                                   {
 
                     }
-#line 1583 "y.tab.c"
+#line 1593 "y.tab.c"
     break;
 
   case 9:
-#line 111 "calc.y"
+#line 124 "calc.y"
                                                    {
 
                     }
-#line 1591 "y.tab.c"
+#line 1601 "y.tab.c"
     break;
 
   case 10:
-#line 114 "calc.y"
+#line 127 "calc.y"
                                {
 
                     }
-#line 1599 "y.tab.c"
+#line 1609 "y.tab.c"
     break;
 
   case 11:
-#line 117 "calc.y"
+#line 130 "calc.y"
                                                    {
 
                     }
-#line 1607 "y.tab.c"
+#line 1617 "y.tab.c"
     break;
 
   case 12:
-#line 120 "calc.y"
+#line 133 "calc.y"
                                                    {
 
                     }
-#line 1615 "y.tab.c"
+#line 1625 "y.tab.c"
     break;
 
   case 13:
-#line 123 "calc.y"
+#line 136 "calc.y"
                                                    {
 
                     }
-#line 1623 "y.tab.c"
+#line 1633 "y.tab.c"
     break;
 
   case 14:
-#line 126 "calc.y"
+#line 139 "calc.y"
                                                    {
 
                     }
-#line 1631 "y.tab.c"
+#line 1641 "y.tab.c"
     break;
 
   case 15:
-#line 129 "calc.y"
+#line 142 "calc.y"
                                                    {
 
                     }
-#line 1639 "y.tab.c"
+#line 1649 "y.tab.c"
     break;
 
   case 16:
-#line 132 "calc.y"
+#line 145 "calc.y"
                                                    {
 
                     }
-#line 1647 "y.tab.c"
+#line 1657 "y.tab.c"
     break;
 
   case 17:
-#line 135 "calc.y"
+#line 148 "calc.y"
                                                  {
 
                     }
-#line 1655 "y.tab.c"
+#line 1665 "y.tab.c"
     break;
 
   case 18:
-#line 138 "calc.y"
+#line 151 "calc.y"
                                                 {
 
                     }
-#line 1663 "y.tab.c"
+#line 1673 "y.tab.c"
     break;
 
   case 19:
-#line 141 "calc.y"
+#line 154 "calc.y"
                                                   {
 
                     }
-#line 1671 "y.tab.c"
+#line 1681 "y.tab.c"
     break;
 
   case 20:
-#line 144 "calc.y"
+#line 157 "calc.y"
                                                  {
 
                     }
-#line 1679 "y.tab.c"
+#line 1689 "y.tab.c"
     break;
 
   case 21:
-#line 147 "calc.y"
+#line 160 "calc.y"
                                                    {
 
                     }
-#line 1687 "y.tab.c"
+#line 1697 "y.tab.c"
     break;
 
   case 22:
-#line 150 "calc.y"
+#line 163 "calc.y"
                                                 {
 
                     }
-#line 1695 "y.tab.c"
+#line 1705 "y.tab.c"
     break;
 
   case 23:
-#line 153 "calc.y"
+#line 166 "calc.y"
                                                 {
 
                     }
-#line 1703 "y.tab.c"
+#line 1713 "y.tab.c"
     break;
 
   case 24:
-#line 156 "calc.y"
+#line 169 "calc.y"
                                                   {
 
                     }
-#line 1711 "y.tab.c"
+#line 1721 "y.tab.c"
     break;
 
   case 25:
-#line 159 "calc.y"
+#line 172 "calc.y"
                                                    {
 
                     }
-#line 1719 "y.tab.c"
+#line 1729 "y.tab.c"
     break;
 
   case 26:
-#line 162 "calc.y"
+#line 175 "calc.y"
                                                    {
 
                     }
-#line 1727 "y.tab.c"
+#line 1737 "y.tab.c"
     break;
 
   case 27:
-#line 165 "calc.y"
+#line 178 "calc.y"
                                                       {
 
                     }
-#line 1735 "y.tab.c"
+#line 1745 "y.tab.c"
     break;
 
   case 28:
-#line 168 "calc.y"
+#line 181 "calc.y"
                                                   {
 
                     }
-#line 1743 "y.tab.c"
+#line 1753 "y.tab.c"
     break;
 
   case 29:
-#line 171 "calc.y"
+#line 184 "calc.y"
                                                   {
 
                     }
-#line 1751 "y.tab.c"
+#line 1761 "y.tab.c"
     break;
 
   case 30:
-#line 177 "calc.y"
+#line 190 "calc.y"
                                      {
-
+                        (yyvsp[0].paramList) = obtenerNuevaListaParametros();
+                        addParametros((yyvsp[0].paramList), (yyvsp[-1].paramNode));
+                        (yyval.paramList) = (yyvsp[0].paramList);
                     }
-#line 1759 "y.tab.c"
+#line 1771 "y.tab.c"
     break;
 
   case 31:
-#line 180 "calc.y"
+#line 195 "calc.y"
                            {
-
+                        ListaParametros* auxParamsList = obtenerNuevaListaParametros();
+                        addParametros(auxParamsList, (yyvsp[0].paramNode));
+                        (yyval.paramList) = auxParamsList;
                     }
-#line 1767 "y.tab.c"
+#line 1781 "y.tab.c"
     break;
 
   case 32:
-#line 185 "calc.y"
+#line 202 "calc.y"
                                                {
-
+                        (yyval.paramNode) = getNodeParametros((yyvsp[-2].parametro), (yyvsp[0].ruta));
                     }
-#line 1775 "y.tab.c"
+#line 1789 "y.tab.c"
     break;
 
   case 33:
-#line 188 "calc.y"
+#line 205 "calc.y"
                                                   {
-
+                        (yyval.paramNode) = getNodeParametros((yyvsp[-2].parametro), (yyvsp[0].numero));
                     }
-#line 1783 "y.tab.c"
+#line 1797 "y.tab.c"
     break;
 
   case 34:
-#line 191 "calc.y"
+#line 208 "calc.y"
                                                  {
-
+                        (yyval.paramNode) = getNodeParametros((yyvsp[-2].parametro), (yyvsp[0].unidades));
                     }
-#line 1791 "y.tab.c"
+#line 1805 "y.tab.c"
     break;
 
   case 35:
-#line 194 "calc.y"
+#line 211 "calc.y"
                                                {
-
+                        (yyval.paramNode) = getNodeParametros((yyvsp[-2].parametro), (yyvsp[0].ajuste));
                     }
-#line 1799 "y.tab.c"
+#line 1813 "y.tab.c"
     break;
 
   case 36:
-#line 197 "calc.y"
+#line 214 "calc.y"
                                                   {
-
+                        (yyval.paramNode) = getNodeParametros((yyvsp[-2].parametro), (yyvsp[0].nombre));
                     }
-#line 1807 "y.tab.c"
+#line 1821 "y.tab.c"
     break;
 
   case 37:
-#line 200 "calc.y"
+#line 217 "calc.y"
                                                 {
-
+                        (yyval.paramNode) = getNodeParametros((yyvsp[-2].parametro), (yyvsp[0].tipo));
                     }
-#line 1815 "y.tab.c"
+#line 1829 "y.tab.c"
     break;
 
   case 38:
-#line 203 "calc.y"
+#line 220 "calc.y"
                                                        {
-
+                        (yyval.paramNode) = getNodeParametros((yyvsp[-2].parametro), (yyvsp[0].capacidad));
                     }
-#line 1823 "y.tab.c"
+#line 1837 "y.tab.c"
     break;
 
   case 39:
-#line 206 "calc.y"
+#line 223 "calc.y"
                                                  {
-
+                        (yyval.paramNode) = getNodeParametros((yyvsp[-2].parametro), (yyvsp[0].numero));
                     }
-#line 1831 "y.tab.c"
+#line 1845 "y.tab.c"
     break;
 
   case 40:
-#line 209 "calc.y"
+#line 226 "calc.y"
                                                        {
-
+                        (yyval.paramNode) = getNodeParametros((yyvsp[-2].parametro), (yyvsp[0].identificador));
                     }
-#line 1839 "y.tab.c"
+#line 1853 "y.tab.c"
     break;
 
   case 41:
-#line 212 "calc.y"
+#line 229 "calc.y"
                                                      {
-
+                        (yyval.paramNode) = getNodeParametros((yyvsp[-2].parametro), (yyvsp[0].capacidad));
                     }
-#line 1847 "y.tab.c"
+#line 1861 "y.tab.c"
     break;
 
   case 42:
-#line 215 "calc.y"
+#line 232 "calc.y"
                                                  {
-
+                        (yyval.paramNode) = getNodeParametros((yyvsp[-2].parametro), (yyvsp[0].sistema));
                     }
-#line 1855 "y.tab.c"
+#line 1869 "y.tab.c"
     break;
 
   case 43:
-#line 218 "calc.y"
+#line 235 "calc.y"
                                                  {
-
+                        (yyval.paramNode) = getNodeParametros((yyvsp[-2].parametro), (yyvsp[0].nombre));
                     }
-#line 1863 "y.tab.c"
+#line 1877 "y.tab.c"
     break;
 
   case 44:
-#line 221 "calc.y"
+#line 238 "calc.y"
                                                  {
-
+                        (yyval.paramNode) = getNodeParametros((yyvsp[-2].parametro), (yyvsp[0].nombre));
                     }
-#line 1871 "y.tab.c"
+#line 1885 "y.tab.c"
     break;
 
   case 45:
-#line 224 "calc.y"
+#line 241 "calc.y"
                                                  {
-
+                        (yyval.paramNode) = getNodeParametros((yyvsp[-2].parametro), (yyvsp[0].nombre));
                     }
-#line 1879 "y.tab.c"
+#line 1893 "y.tab.c"
     break;
 
   case 46:
-#line 227 "calc.y"
+#line 244 "calc.y"
                                                    {
-
+                        (yyval.paramNode) = getNodeParametros((yyvsp[-2].parametro), (yyvsp[0].permisos));
                     }
-#line 1887 "y.tab.c"
+#line 1901 "y.tab.c"
     break;
 
   case 47:
-#line 230 "calc.y"
+#line 247 "calc.y"
                           {
-
+                        (yyval.paramNode) = getNodeParametros((yyvsp[0].parametro), NULL);
                     }
-#line 1895 "y.tab.c"
+#line 1909 "y.tab.c"
     break;
 
   case 48:
-#line 233 "calc.y"
+#line 250 "calc.y"
                           {
-
+                        (yyval.paramNode) = getNodeParametros((yyvsp[0].parametro), NULL);
                     }
-#line 1903 "y.tab.c"
+#line 1917 "y.tab.c"
     break;
 
   case 49:
-#line 236 "calc.y"
+#line 253 "calc.y"
                               {
-
+                        (yyval.paramNode) = getNodeParametros((yyvsp[0].parametro), NULL);
                     }
-#line 1911 "y.tab.c"
+#line 1925 "y.tab.c"
     break;
 
   case 50:
-#line 239 "calc.y"
+#line 256 "calc.y"
                                                 {
-
+                        (yyval.paramNode) = getNodeParametros((yyvsp[-2].parametro), (yyvsp[0].ruta));
                     }
-#line 1919 "y.tab.c"
+#line 1933 "y.tab.c"
     break;
 
   case 51:
-#line 242 "calc.y"
+#line 259 "calc.y"
                                                 {
-
+                        (yyval.paramNode) = getNodeParametros((yyvsp[-2].parametro), (yyvsp[0].ruta));
                     }
-#line 1927 "y.tab.c"
+#line 1941 "y.tab.c"
     break;
 
   case 52:
-#line 245 "calc.y"
+#line 262 "calc.y"
                                                  {
-
+                        (yyval.paramNode) = getNodeParametros((yyvsp[-2].parametro), (yyvsp[0].ruta));
                     }
-#line 1935 "y.tab.c"
+#line 1949 "y.tab.c"
     break;
 
 
-#line 1939 "y.tab.c"
+#line 1953 "y.tab.c"
 
       default: break;
     }
@@ -2167,7 +2181,7 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 251 "calc.y"
+#line 268 "calc.y"
 
 int main(){
     FILE *file = fopen("entrada.txt", "r");

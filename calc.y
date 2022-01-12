@@ -5,8 +5,14 @@
 
 extern FILE *yyin;
 
+//INSTANCIAR LAS LISTAS
+
+#define LISTACOMANDS obtenerNuevaListaComandos();
+
 %}
 %union{
+    char *comando;
+    char *parametro;
     char *numero;
     char *ajuste;
     char *ruta;
@@ -17,6 +23,10 @@ extern FILE *yyin;
     char *sistema;
     char *permisos;
     char *identificador;
+    struct NodoParametro *paramNode;
+    struct NodoComando *comandNode;
+    struct ListaComandos *comandList;
+    struct ListaParametros *paramList;
 }
 %token <numero> TOK_NUMERO
 %token <ajuste>TOK_AJUSTE
@@ -29,58 +39,61 @@ extern FILE *yyin;
 %token <permisos>TOK_PERMISOS
 %token <identificador>TOK_IDENTIFICADOR
 
-%token TOK_MKDISK
-%token TOK_RMDISK
-%token TOK_FDISK
-%token TOK_MOUNT
-%token TOK_UNMOUNT
-%token TOK_MKFS
-%token TOK_LOGIN
-%token TOK_LOGOUT
-%token TOK_MKGRP
-%token TOK_RMGRP
-%token TOK_MKUSR
-%token TOK_RMUSR
-%token TOK_CHMOD
-%token TOK_TOUCH
-%token TOK_MKDIR
-%token TOK_RM
-%token TOK_EDIT
-%token TOK_REN
-%token TOK_CP
-%token TOK_MV
-%token TOK_FIND
-%token TOK_CHOWN
-%token TOK_CHGRP
-%token TOK_RECOVERY
-%token TOK_LOSS
-%token TOK_EXEC
-%token TOK_SIZE
-%token TOK_PATH
-%token TOK_NAME
-%token TOK_ID
-%token TOK_USR
-%token TOK_PWD
-%token TOK_GRP
-%token TOK_UGO
-%token TOK_CAT
-%token TOK_FILEN
-%token TOK_STDIN
-%token TOK_CONT
-%token TOK_DEST
-%token TOK_F
-%token TOK_U
-%token TOK_TYPE
-%token TOK_DELETE
-%token TOK_ADD
-%token TOK_FS
-%token TOK_R
-%token TOK_P
-%token TOK_INTERROGACION
-%token TOK_CERRADURA
+%token <comando> TOK_MKDISK
+%token <comando> TOK_RMDISK
+%token <comando> TOK_FDISK
+%token <comando> TOK_MOUNT
+%token <comando> TOK_UNMOUNT
+%token <comando> TOK_MKFS
+%token <comando> TOK_LOGIN
+%token <comando> TOK_LOGOUT
+%token <comando> TOK_MKGRP
+%token <comando> TOK_RMGRP
+%token <comando> TOK_MKUSR
+%token <comando> TOK_RMUSR
+%token <comando> TOK_CHMOD
+%token <comando> TOK_TOUCH
+%token <comando> TOK_MKDIR
+%token <comando> TOK_RM
+%token <comando> TOK_EDIT
+%token <comando> TOK_REN
+%token <comando> TOK_CP
+%token <comando> TOK_MV
+%token <comando> TOK_FIND
+%token <comando> TOK_CHOWN
+%token <comando> TOK_CHGRP
+%token <comando> TOK_RECOVERY
+%token <comando> TOK_LOSS
+%token <comando> TOK_EXEC
+%token <parametro> TOK_SIZE
+%token <parametro> TOK_PATH
+%token <parametro> TOK_NAME
+%token <parametro> TOK_ID
+%token <parametro> TOK_USR
+%token <parametro> TOK_PWD
+%token <parametro> TOK_GRP
+%token <parametro> TOK_UGO
+%token <parametro> TOK_CAT
+%token <parametro> TOK_FILEN
+%token <parametro> TOK_STDIN
+%token <parametro> TOK_CONT
+%token <parametro> TOK_DEST
+%token <parametro> TOK_F
+%token <parametro> TOK_U
+%token <parametro> TOK_TYPE
+%token <parametro> TOK_DELETE
+%token <parametro> TOK_ADD
+%token <parametro> TOK_FS
+%token <parametro> TOK_R
+%token <parametro> TOK_P
+%token <parametro> TOK_INTERROGACION
+%token <parametro> TOK_CERRADURA
 %token TOK_IGUAL
 %token TOK_SALTO
 
+%type <paramNode> params
+%type <comandNode> instruccion
+%type <paramList> paramslist
 
 
 %start inicio
@@ -175,75 +188,79 @@ instruccion:        TOK_MKDISK paramslist TOK_SALTO{
 
 
 paramslist:         params paramslist{
-
+                        $2 = obtenerNuevaListaParametros();
+                        addParametros($2, $1);
+                        $$ = $2;
                     }
                     |params{
-
+                        ListaParametros* auxParamsList = obtenerNuevaListaParametros();
+                        addParametros(auxParamsList, $1);
+                        $$ = auxParamsList;
                     }
 ;
 
 params:             TOK_PATH TOK_IGUAL TOK_RUTA{
-
+                        $$ = getNodeParametros($1, $3);
                     }
                     |TOK_SIZE TOK_IGUAL TOK_NUMERO{
-
+                        $$ = getNodeParametros($1, $3);
                     }
                     |TOK_U TOK_IGUAL TOK_UNIDADES{
-
+                        $$ = getNodeParametros($1, $3);
                     }
                     |TOK_F TOK_IGUAL TOK_AJUSTE{
-
+                        $$ = getNodeParametros($1, $3);
                     }
                     |TOK_NAME TOK_IGUAL TOK_NOMBRE{
-
+                        $$ = getNodeParametros($1, $3);
                     }
                     |TOK_TYPE TOK_IGUAL TOK_TIPO{
-
+                        $$ = getNodeParametros($1, $3);
                     }
                     |TOK_DELETE TOK_IGUAL TOK_CAPACIDAD{
-
+                        $$ = getNodeParametros($1, $3);
                     }
                     |TOK_ADD TOK_IGUAL TOK_NUMERO{
-
+                        $$ = getNodeParametros($1, $3);
                     }
                     |TOK_ID TOK_IGUAL TOK_IDENTIFICADOR{
-
+                        $$ = getNodeParametros($1, $3);
                     }
                     |TOK_TYPE TOK_IGUAL TOK_CAPACIDAD{
-
+                        $$ = getNodeParametros($1, $3);
                     }
                     |TOK_FS TOK_IGUAL TOK_SISTEMA{
-
+                        $$ = getNodeParametros($1, $3);
                     }
                     |TOK_USR TOK_IGUAL TOK_NOMBRE{
-
+                        $$ = getNodeParametros($1, $3);
                     }
                     |TOK_PWD TOK_IGUAL TOK_NOMBRE{
-
+                        $$ = getNodeParametros($1, $3);
                     }  
                     |TOK_GRP TOK_IGUAL TOK_NOMBRE{
-
+                        $$ = getNodeParametros($1, $3);
                     }
                     |TOK_UGO TOK_IGUAL TOK_PERMISOS{
-
+                        $$ = getNodeParametros($1, $3);
                     }
                     |TOK_R{
-
+                        $$ = getNodeParametros($1, NULL);
                     }
                     |TOK_P{
-
+                        $$ = getNodeParametros($1, NULL);
                     }
                     |TOK_STDIN{
-
+                        $$ = getNodeParametros($1, NULL);
                     }
                     |TOK_CONT TOK_IGUAL TOK_RUTA{
-
+                        $$ = getNodeParametros($1, $3);
                     }
                     |TOK_DEST TOK_IGUAL TOK_RUTA{
-
+                        $$ = getNodeParametros($1, $3);
                     }
                     |TOK_FILEN TOK_IGUAL TOK_RUTA{
-
+                        $$ = getNodeParametros($1, $3);
                     }
 ;
 
