@@ -4,6 +4,68 @@
 #include <stdlib.h>
 #include <stdbool.h> 
 
+typedef struct Comando{
+    char *nombre;
+    struct ListaParametros *paramList;
+    struct Comando *siguiente;
+}NodoComando;
+
+typedef struct comandList{
+    int tamano;
+    NodoComando* primerItem;
+    NodoComando* ultimoItem;
+}ListaComandos;
+
+NodoComando* getNodeComando(char *nombre, struct ListaParametros *ll){
+    NodoComando* nodo = (NodoComando*)malloc(sizeof(NodoComando));
+    nodo->nombre = nombre;
+    nodo->paramList = ll;
+    nodo->siguiente = NULL;
+    return nodo;
+}
+
+ListaComandos* obtenerNuevaListaComandos(){
+    ListaComandos* ll = (ListaComandos*)malloc(sizeof(ListaComandos));
+    ll->tamano=0;
+    ll->primerItem = NULL;
+    ll->ultimoItem = NULL;
+    return ll;
+}
+
+//* Operaciones CRUD
+
+void addComando(ListaComandos* ll,NodoComando* nodo){
+    if (ll->primerItem == NULL){
+        ll->primerItem = nodo;
+    } 
+    else {
+        ll->ultimoItem->siguiente = nodo;
+    }
+    ll->ultimoItem = nodo;
+    ll->tamano++;
+}
+
+void readComando(ListaComandos* ll){
+    NodoComando* exploradorLista = ll->primerItem;
+    while (exploradorLista != NULL){
+        printf("%s ", exploradorLista->nombre);
+        exploradorLista = exploradorLista->siguiente;
+    }
+}
+
+bool searchComando(ListaComandos* ll, char *token){
+    NodoComando* exploradorLista = ll->primerItem;
+    bool bandera = false;
+    while (exploradorLista != NULL){
+        if(token == exploradorLista->nombre){
+            //printf("%s\n", exploradorLista->nombre);
+            bandera = true;
+        }
+        exploradorLista = exploradorLista->siguiente;
+    }
+    return bandera;
+}
+
 typedef struct parametros{
     char *nombre;
     char *valor;
@@ -37,7 +99,7 @@ ListaParametros* obtenerNuevaListaParametros(){
 void addParametros(ListaParametros* ll,NodoParametro* nodo){
     if (ll->primerItem == NULL){
         ll->primerItem = nodo;
-    }
+    } 
     else{
         ll->ultimoItem->siguiente = nodo;
     } 
@@ -48,8 +110,9 @@ void addParametros(ListaParametros* ll,NodoParametro* nodo){
 void readParametros(ListaParametros* ll){
     NodoParametro* exploradorLista = ll->primerItem;
     while (exploradorLista != NULL){
-        printf(" %s = %s ", exploradorLista->nombre, exploradorLista->valor);
-        exploradorLista = exploradorLista->siguiente;   
+        printf("%s = %s ", exploradorLista->nombre, exploradorLista->valor);
+        exploradorLista = exploradorLista->siguiente;
+        
     }
 }
 
@@ -65,72 +128,6 @@ bool searchParametros(ListaParametros* ll, char *token){
     }
     return bandera;
 }
-
-typedef struct Comando{
-    char *nombre;
-    struct parametros *paramList;
-    struct Comando *siguiente;
-}NodoComando;
-
-typedef struct comandList{
-    int tamano;
-    NodoComando* primerItem;
-    NodoComando* ultimoItem;
-}ListaComandos;
-
-NodoComando* getNodeComando(char *nombre, struct parametros *paramList){
-    NodoComando* nodo = (NodoComando*)malloc(sizeof(NodoComando));
-    nodo->nombre = nombre;
-    nodo->paramList = paramList;
-    nodo->siguiente = NULL;
-    return nodo;
-}
-
-ListaComandos* obtenerNuevaListaComandos(){
-    ListaComandos* ll = (ListaComandos*)malloc(sizeof(ListaComandos));
-    ll->tamano=0;
-    ll->primerItem = NULL;
-    ll->ultimoItem = NULL;
-    return ll;
-}
-
-//* Operaciones CRUD
-
-void addComando(ListaComandos* ll,NodoComando* nodo){
-    if (ll->primerItem == NULL){
-        ll->primerItem = nodo;
-    } 
-    else {
-        ll->ultimoItem->siguiente = nodo;
-    }
-    ll->ultimoItem = nodo;
-    ll->tamano++;
-}
-
-void readComando(ListaComandos* ll){
-    NodoComando* exploradorLista = ll->primerItem;
-    while (exploradorLista != NULL){
-        printf("%s ", exploradorLista->nombre);
-        readParametros(exploradorLista->paramList);
-        free(exploradorLista->paramList);
-        exploradorLista = exploradorLista->siguiente;
-    }
-}
-
-bool searchComando(ListaComandos* ll, char *token){
-    NodoComando* exploradorLista = ll->primerItem;
-    bool bandera = false;
-    while (exploradorLista != NULL){
-        if(token == exploradorLista->nombre){
-            //printf("%s\n", exploradorLista->nombre);
-            bandera = true;
-        }
-        exploradorLista = exploradorLista->siguiente;
-    }
-    return bandera;
-}
-
-
 /* 
 void update(ListaComandos* ll, unsigned int indice, int nuevoValor){
     if (ll->tamano && indice<ll->tamano){

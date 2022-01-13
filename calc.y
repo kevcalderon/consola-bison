@@ -252,11 +252,15 @@ instruccion:        TOK_MKDISK paramslist TOK_SALTO{
 paramslist:         params paramslist{
                         $2 = obtenerNuevaListaParametros();
                         addParametros($2, $1);
+                        readParametros($2);
+                        free($2);
                         $$ = $2;
                     }
                     |params{
                         ListaParametros* auxParamsList = obtenerNuevaListaParametros();
                         addParametros(auxParamsList, $1);
+                        readParametros(auxParamsList);
+                        free(auxParamsList);
                         $$ = auxParamsList;
                     }
 ;

@@ -701,9 +701,9 @@ static const yytype_int16 yyrline[] =
        0,   146,   146,   152,   159,   168,   171,   174,   177,   180,
      183,   186,   189,   192,   195,   198,   201,   204,   207,   210,
      213,   216,   219,   222,   225,   228,   231,   234,   237,   240,
-     243,   246,   252,   257,   264,   267,   270,   273,   276,   279,
-     282,   285,   288,   291,   294,   297,   300,   303,   306,   309,
-     312,   315,   318,   321,   324
+     243,   246,   252,   259,   268,   271,   274,   277,   280,   283,
+     286,   289,   292,   295,   298,   301,   304,   307,   310,   313,
+     316,   319,   322,   325,   328
 };
 #endif
 
@@ -1836,191 +1836,195 @@ yyreduce:
                                      {
                         (yyvsp[0].paramList) = obtenerNuevaListaParametros();
                         addParametros((yyvsp[0].paramList), (yyvsp[-1].paramNode));
+                        readParametros((yyvsp[0].paramList));
+                        free((yyvsp[0].paramList));
                         (yyval.paramList) = (yyvsp[0].paramList);
                     }
-#line 1842 "y.tab.c"
+#line 1844 "y.tab.c"
     break;
 
   case 33:
-#line 257 "calc.y"
+#line 259 "calc.y"
                            {
                         ListaParametros* auxParamsList = obtenerNuevaListaParametros();
                         addParametros(auxParamsList, (yyvsp[0].paramNode));
+                        readParametros(auxParamsList);
+                        free(auxParamsList);
                         (yyval.paramList) = auxParamsList;
                     }
-#line 1852 "y.tab.c"
+#line 1856 "y.tab.c"
     break;
 
   case 34:
-#line 264 "calc.y"
+#line 268 "calc.y"
                                                {
                         (yyval.paramNode) = getNodeParametros((yyvsp[-2].path), (yyvsp[0].ruta));
                     }
-#line 1860 "y.tab.c"
+#line 1864 "y.tab.c"
     break;
 
   case 35:
-#line 267 "calc.y"
+#line 271 "calc.y"
                                                   {
                         (yyval.paramNode) = getNodeParametros((yyvsp[-2].size), (yyvsp[0].numero));
                     }
-#line 1868 "y.tab.c"
+#line 1872 "y.tab.c"
     break;
 
   case 36:
-#line 270 "calc.y"
+#line 274 "calc.y"
                                                  {
                         (yyval.paramNode) = getNodeParametros((yyvsp[-2].u), (yyvsp[0].unidades));
                     }
-#line 1876 "y.tab.c"
+#line 1880 "y.tab.c"
     break;
 
   case 37:
-#line 273 "calc.y"
+#line 277 "calc.y"
                                                {
                         (yyval.paramNode) = getNodeParametros((yyvsp[-2].f), (yyvsp[0].ajuste));
                     }
-#line 1884 "y.tab.c"
+#line 1888 "y.tab.c"
     break;
 
   case 38:
-#line 276 "calc.y"
+#line 280 "calc.y"
                                                   {
                         (yyval.paramNode) = getNodeParametros((yyvsp[-2].name), (yyvsp[0].nombre));
                     }
-#line 1892 "y.tab.c"
+#line 1896 "y.tab.c"
     break;
 
   case 39:
-#line 279 "calc.y"
+#line 283 "calc.y"
                                                 {
                         (yyval.paramNode) = getNodeParametros((yyvsp[-2].type), (yyvsp[0].tipo));
                     }
-#line 1900 "y.tab.c"
+#line 1904 "y.tab.c"
     break;
 
   case 40:
-#line 282 "calc.y"
+#line 286 "calc.y"
                                                        {
                         (yyval.paramNode) = getNodeParametros((yyvsp[-2].delete), (yyvsp[0].capacidad));
                     }
-#line 1908 "y.tab.c"
+#line 1912 "y.tab.c"
     break;
 
   case 41:
-#line 285 "calc.y"
+#line 289 "calc.y"
                                                  {
                         (yyval.paramNode) = getNodeParametros((yyvsp[-2].add), (yyvsp[0].numero));
                     }
-#line 1916 "y.tab.c"
+#line 1920 "y.tab.c"
     break;
 
   case 42:
-#line 288 "calc.y"
+#line 292 "calc.y"
                                                        {
                         (yyval.paramNode) = getNodeParametros((yyvsp[-2].id), (yyvsp[0].identificador));
                     }
-#line 1924 "y.tab.c"
+#line 1928 "y.tab.c"
     break;
 
   case 43:
-#line 291 "calc.y"
+#line 295 "calc.y"
                                                      {
                         (yyval.paramNode) = getNodeParametros((yyvsp[-2].type), (yyvsp[0].capacidad));
                     }
-#line 1932 "y.tab.c"
+#line 1936 "y.tab.c"
     break;
 
   case 44:
-#line 294 "calc.y"
+#line 298 "calc.y"
                                                  {
                         (yyval.paramNode) = getNodeParametros((yyvsp[-2].fs), (yyvsp[0].sistema));
                     }
-#line 1940 "y.tab.c"
+#line 1944 "y.tab.c"
     break;
 
   case 45:
-#line 297 "calc.y"
+#line 301 "calc.y"
                                                  {
                         (yyval.paramNode) = getNodeParametros((yyvsp[-2].usr), (yyvsp[0].nombre));
                     }
-#line 1948 "y.tab.c"
+#line 1952 "y.tab.c"
     break;
 
   case 46:
-#line 300 "calc.y"
+#line 304 "calc.y"
                                                  {
                         (yyval.paramNode) = getNodeParametros((yyvsp[-2].pwd), (yyvsp[0].nombre));
                     }
-#line 1956 "y.tab.c"
+#line 1960 "y.tab.c"
     break;
 
   case 47:
-#line 303 "calc.y"
+#line 307 "calc.y"
                                                  {
                         (yyval.paramNode) = getNodeParametros((yyvsp[-2].grp), (yyvsp[0].nombre));
                     }
-#line 1964 "y.tab.c"
+#line 1968 "y.tab.c"
     break;
 
   case 48:
-#line 306 "calc.y"
+#line 310 "calc.y"
                                                    {
                         (yyval.paramNode) = getNodeParametros((yyvsp[-2].ugo), (yyvsp[0].permisos));
                     }
-#line 1972 "y.tab.c"
+#line 1976 "y.tab.c"
     break;
 
   case 49:
-#line 309 "calc.y"
+#line 313 "calc.y"
                           {
                         (yyval.paramNode) = getNodeParametros((yyvsp[0].r), NULL);
                     }
-#line 1980 "y.tab.c"
+#line 1984 "y.tab.c"
     break;
 
   case 50:
-#line 312 "calc.y"
+#line 316 "calc.y"
                           {
                         (yyval.paramNode) = getNodeParametros((yyvsp[0].p), NULL);
                     }
-#line 1988 "y.tab.c"
+#line 1992 "y.tab.c"
     break;
 
   case 51:
-#line 315 "calc.y"
+#line 319 "calc.y"
                               {
                         (yyval.paramNode) = getNodeParametros((yyvsp[0].stdin), NULL);
                     }
-#line 1996 "y.tab.c"
+#line 2000 "y.tab.c"
     break;
 
   case 52:
-#line 318 "calc.y"
+#line 322 "calc.y"
                                                 {
                         (yyval.paramNode) = getNodeParametros((yyvsp[-2].cont), (yyvsp[0].ruta));
                     }
-#line 2004 "y.tab.c"
+#line 2008 "y.tab.c"
     break;
 
   case 53:
-#line 321 "calc.y"
+#line 325 "calc.y"
                                                 {
                         (yyval.paramNode) = getNodeParametros((yyvsp[-2].dest), (yyvsp[0].ruta));
                     }
-#line 2012 "y.tab.c"
+#line 2016 "y.tab.c"
     break;
 
   case 54:
-#line 324 "calc.y"
+#line 328 "calc.y"
                                                  {
                         (yyval.paramNode) = getNodeParametros((yyvsp[-2].filen), (yyvsp[0].ruta));
                     }
-#line 2020 "y.tab.c"
+#line 2024 "y.tab.c"
     break;
 
 
-#line 2024 "y.tab.c"
+#line 2028 "y.tab.c"
 
       default: break;
     }
@@ -2252,7 +2256,7 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 330 "calc.y"
+#line 334 "calc.y"
 
 int main(){
     FILE *file = fopen("entrada.txt", "r");
