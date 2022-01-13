@@ -1,18 +1,60 @@
 %{
 #include <stdio.h>
 #include "edd/lista-simpleComando.c"
-#include "edd/lista-simpleParametros.c"
-
 extern FILE *yyin;
-
-//INSTANCIAR LAS LISTAS
-
-#define LISTACOMANDS obtenerNuevaListaComandos();
-
 %}
+
 %union{
-    char *comando;
-    char *parametro;
+
+    char *mkdisk;
+    char *rmdisk;
+    char *fdisk;
+    char *mount;
+    char *unmount;
+    char *mkfs;
+    char *login;
+    char *logout;
+    char *mkgrp;
+    char *rmgrp;
+    char *mkusr;
+    char *rmusr;
+    char *chmod;
+    char *touch;
+    char *mkdir;
+    char *rm;
+    char *edit;
+    char *ren;
+    char *cp;
+    char *mv;
+    char *find;
+    char *chown;
+    char *chgrp;
+    char *recovery;
+    char *loss;
+    char *exec;
+    char *size;
+    char *path;
+    char *name;
+    char *id;
+    char *usr;
+    char *pwd;
+    char *grp;
+    char *ugo;
+    char *cat;
+    char *filen;
+    char *stdin;
+    char *cont;
+    char *dest;
+    char *f;
+    char *u;
+    char *type;
+    char *delete;
+    char *fs;
+    char *r;
+    char *p;
+    char *add;
+    char *interrogacion;
+    char *cerradura;
     char *numero;
     char *ajuste;
     char *ruta;
@@ -39,150 +81,170 @@ extern FILE *yyin;
 %token <permisos>TOK_PERMISOS
 %token <identificador>TOK_IDENTIFICADOR
 
-%token <comando> TOK_MKDISK
-%token <comando> TOK_RMDISK
-%token <comando> TOK_FDISK
-%token <comando> TOK_MOUNT
-%token <comando> TOK_UNMOUNT
-%token <comando> TOK_MKFS
-%token <comando> TOK_LOGIN
-%token <comando> TOK_LOGOUT
-%token <comando> TOK_MKGRP
-%token <comando> TOK_RMGRP
-%token <comando> TOK_MKUSR
-%token <comando> TOK_RMUSR
-%token <comando> TOK_CHMOD
-%token <comando> TOK_TOUCH
-%token <comando> TOK_MKDIR
-%token <comando> TOK_RM
-%token <comando> TOK_EDIT
-%token <comando> TOK_REN
-%token <comando> TOK_CP
-%token <comando> TOK_MV
-%token <comando> TOK_FIND
-%token <comando> TOK_CHOWN
-%token <comando> TOK_CHGRP
-%token <comando> TOK_RECOVERY
-%token <comando> TOK_LOSS
-%token <comando> TOK_EXEC
-%token <parametro> TOK_SIZE
-%token <parametro> TOK_PATH
-%token <parametro> TOK_NAME
-%token <parametro> TOK_ID
-%token <parametro> TOK_USR
-%token <parametro> TOK_PWD
-%token <parametro> TOK_GRP
-%token <parametro> TOK_UGO
-%token <parametro> TOK_CAT
-%token <parametro> TOK_FILEN
-%token <parametro> TOK_STDIN
-%token <parametro> TOK_CONT
-%token <parametro> TOK_DEST
-%token <parametro> TOK_F
-%token <parametro> TOK_U
-%token <parametro> TOK_TYPE
-%token <parametro> TOK_DELETE
-%token <parametro> TOK_ADD
-%token <parametro> TOK_FS
-%token <parametro> TOK_R
-%token <parametro> TOK_P
-%token <parametro> TOK_INTERROGACION
-%token <parametro> TOK_CERRADURA
+%token <mkdisk> TOK_MKDISK
+%token <rmdisk> TOK_RMDISK
+%token <fdisk> TOK_FDISK
+%token <mount> TOK_MOUNT
+%token <unmount> TOK_UNMOUNT
+%token <mkfs> TOK_MKFS
+%token <login> TOK_LOGIN
+%token <logout> TOK_LOGOUT
+%token <mkgrp> TOK_MKGRP
+%token <rmgrp> TOK_RMGRP
+%token <mkusr> TOK_MKUSR
+%token <rmusr> TOK_RMUSR
+%token <chmod> TOK_CHMOD
+%token <touch> TOK_TOUCH
+%token <mkdir> TOK_MKDIR
+%token <rm> TOK_RM
+%token <edit> TOK_EDIT
+%token <ren> TOK_REN
+%token <cp> TOK_CP
+%token <mv> TOK_MV
+%token <find> TOK_FIND
+%token <chown> TOK_CHOWN
+%token <chgrp> TOK_CHGRP
+%token <recovery> TOK_RECOVERY
+%token <loss> TOK_LOSS
+%token <exec> TOK_EXEC
+%token <size> TOK_SIZE
+%token <path> TOK_PATH
+%token <name> TOK_NAME
+%token <id> TOK_ID
+%token <usr> TOK_USR
+%token <pwd> TOK_PWD
+%token <grp> TOK_GRP
+%token <ugo> TOK_UGO
+%token <cat> TOK_CAT
+%token <filen> TOK_FILEN
+%token <stdin> TOK_STDIN
+%token <cont> TOK_CONT
+%token <dest> TOK_DEST
+%token <f> TOK_F
+%token <u> TOK_U
+%token <type> TOK_TYPE
+%token <delete> TOK_DELETE
+%token <add> TOK_ADD
+%token <fs> TOK_FS
+%token <r> TOK_R
+%token <p> TOK_P
+%token <interrogacion> TOK_INTERROGACION
+%token <cerradura> TOK_CERRADURA
 %token TOK_IGUAL
 %token TOK_SALTO
 
 %type <paramNode> params
 %type <comandNode> instruccion
 %type <paramList> paramslist
+%type <comandList> instrucciones
 
 
 %start inicio
 
 
 %%
-inicio:   instruccion { printf("el comando funciona");}
+inicio:     instrucciones{ 
+                free($1);
+                
+            }
+;
+
+instrucciones:  instruccion instrucciones{
+                    $2 = obtenerNuevaListaComandos();
+                    addComando($2, $1);
+                    readComando($2);
+                    printf("termina un comando \n");
+                    $$ = $2;
+                    }
+                |instruccion{ 
+                    ListaComandos* auxComand = obtenerNuevaListaComandos();
+                    addComando(auxComand, $1);
+                    readComando(auxComand);
+                    printf("termina un comando \n");
+                    $$ = auxComand; 
+                }
 ;
 
 instruccion:        TOK_MKDISK paramslist TOK_SALTO{
-
+                        $$ = getNodeComando($1,$2);
                     }
                     |TOK_RMDISK paramslist TOK_SALTO{
-
+                        $$ = getNodeComando($1,$2);
                     }
                     |TOK_FDISK paramslist TOK_SALTO{
-
+                        $$ = getNodeComando($1,$2);
                     }
                     |TOK_MOUNT paramslist TOK_SALTO{
-
+                        $$ = getNodeComando($1,$2);
                     }
                     |TOK_UNMOUNT paramslist TOK_SALTO{
-
+                        $$ = getNodeComando($1,$2);
                     }
                     |TOK_MKFS paramslist TOK_SALTO{
-
+                        $$ = getNodeComando($1,$2);
                     }
                     |TOK_LOGIN paramslist TOK_SALTO{
-
+                        $$ = getNodeComando($1,$2);
                     }
                     |TOK_LOGOUT{
-
+                        $$ = getNodeComando($1,NULL);
                     }
                     |TOK_MKGRP paramslist TOK_SALTO{
-
+                        $$ = getNodeComando($1,$2);
                     }
                     |TOK_RMGRP paramslist TOK_SALTO{
-
+                        $$ = getNodeComando($1,$2);
                     }
                     |TOK_MKUSR paramslist TOK_SALTO{
-
+                        $$ = getNodeComando($1,$2);
                     }  
                     |TOK_RMUSR paramslist TOK_SALTO{
-
+                        $$ = getNodeComando($1,$2);
                     }
                     |TOK_CHMOD paramslist TOK_SALTO{
-
+                        $$ = getNodeComando($1,$2);
                     }
                     |TOK_TOUCH paramslist TOK_SALTO{
-
+                        $$ = getNodeComando($1,$2);
                     }
                     |TOK_CAT paramslist TOK_SALTO{
-
+                        $$ = getNodeComando($1,$2);
                     }
                     |TOK_RM paramslist TOK_SALTO{
-
+                        $$ = getNodeComando($1,$2);
                     }
                     |TOK_EDIT paramslist TOK_SALTO{
-
+                        $$ = getNodeComando($1,$2);
                     }
                     |TOK_REN paramslist TOK_SALTO{
-
+                        $$ = getNodeComando($1,$2);
                     }
                     |TOK_MKDIR paramslist TOK_SALTO{
-
+                        $$ = getNodeComando($1,$2);
                     }
                     |TOK_CP paramslist TOK_SALTO{
-
+                        $$ = getNodeComando($1,$2);
                     }
                     |TOK_MV paramslist TOK_SALTO{
-
+                        $$ = getNodeComando($1,$2);
                     }
                     |TOK_FIND paramslist TOK_SALTO{
-
+                        $$ = getNodeComando($1,$2);
                     }
                     |TOK_CHOWN paramslist TOK_SALTO{
-
+                        $$ = getNodeComando($1,$2);
                     }
                     |TOK_CHGRP paramslist TOK_SALTO{
-
+                        $$ = getNodeComando($1,$2);
                     }
                     |TOK_RECOVERY paramslist TOK_SALTO{
-
+                        $$ = getNodeComando($1,$2);
                     }
                     |TOK_LOSS paramslist TOK_SALTO{
-
+                        $$ = getNodeComando($1,$2);
                     }
                     |TOK_EXEC paramslist TOK_SALTO{
-
+                        $$ = getNodeComando($1,$2);
                     }
 ;
 
@@ -271,10 +333,11 @@ int main(){
     yyin = file;
     yyparse();
     fclose(yyin);
+    
+    
 }
 
 void yyerror(char* s){
     fprintf(stderr, "%s\n" , s);
 }
-
 

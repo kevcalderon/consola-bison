@@ -179,10 +179,58 @@ extern int yydebug;
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 13 "calc.y"
+#line 7 "calc.y"
 
-    char *comando;
-    char *parametro;
+
+    char *mkdisk;
+    char *rmdisk;
+    char *fdisk;
+    char *mount;
+    char *unmount;
+    char *mkfs;
+    char *login;
+    char *logout;
+    char *mkgrp;
+    char *rmgrp;
+    char *mkusr;
+    char *rmusr;
+    char *chmod;
+    char *touch;
+    char *mkdir;
+    char *rm;
+    char *edit;
+    char *ren;
+    char *cp;
+    char *mv;
+    char *find;
+    char *chown;
+    char *chgrp;
+    char *recovery;
+    char *loss;
+    char *exec;
+    char *size;
+    char *path;
+    char *name;
+    char *id;
+    char *usr;
+    char *pwd;
+    char *grp;
+    char *ugo;
+    char *cat;
+    char *filen;
+    char *stdin;
+    char *cont;
+    char *dest;
+    char *f;
+    char *u;
+    char *type;
+    char *delete;
+    char *fs;
+    char *r;
+    char *p;
+    char *add;
+    char *interrogacion;
+    char *cerradura;
     char *numero;
     char *ajuste;
     char *ruta;
@@ -198,7 +246,7 @@ union YYSTYPE
     struct ListaComandos *comandList;
     struct ListaParametros *paramList;
 
-#line 202 "y.tab.h"
+#line 250 "y.tab.h"
 
 };
 typedef union YYSTYPE YYSTYPE;

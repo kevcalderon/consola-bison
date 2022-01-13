@@ -1,1 +1,4 @@
 Mkdisk -path=/home/user/Disco2.dk -size=3000 -U=K
+FDISK -path=/home/user/Disco2.dk -size=3000 -U=K
+MV -path=/home/user/Disco2.dk -size=3000 -U=K
+CP -path=/home/user/Disco2.dk -size=3000 -U=K

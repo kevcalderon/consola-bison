@@ -77,75 +77,65 @@ salto           "\n"
 
 %%
 
-{mkdisk}        {return TOK_MKDISK;}
-{rmdisk}        {return TOK_MKDISK;}
-{fdisk}        {return TOK_FDISK;}
-{mount}        {return TOK_MOUNT;}
-{unmount}        {return TOK_UNMOUNT;}
-{mkfs}        {return TOK_MKFS;}
-{login}        {return TOK_LOGIN;}
-{logout}        {return TOK_LOGOUT;}
-{stdin}        {return TOK_STDIN;}
+{mkdisk}                {yylval.mkdisk = strdup(yytext); return TOK_MKDISK;}
+{rmdisk}                {yylval.rmdisk = strdup(yytext); return TOK_MKDISK;}
+{fdisk}                 {yylval.fdisk = strdup(yytext); return TOK_FDISK;}
+{mount}                 {yylval.mount = strdup(yytext); return TOK_MOUNT;}
+{unmount}               {yylval.unmount = strdup(yytext); return TOK_UNMOUNT;}
+{mkfs}                  {yylval.mkfs = strdup(yytext); return TOK_MKFS;}
+{login}                 {yylval.login = strdup(yytext); return TOK_LOGIN;}
+{logout}                {yylval.logout = strdup(yytext); return TOK_LOGOUT;}
+{stdin}                 {yylval.stdin = strdup(yytext); return TOK_STDIN;}
+{mkgrp}                 {yylval.mkgrp = strdup(yytext); return TOK_MKGRP;}
+{rmgrp}                 {yylval.rmgrp = strdup(yytext); return TOK_RMGRP;}
+{mkusr}                 {yylval.mkusr = strdup(yytext); return TOK_MKUSR;}
+{mkdir}                 {yylval.mkdir = strdup(yytext); return TOK_MKDIR;}
+{rmusr}                 {yylval.rmusr = strdup(yytext); return TOK_RMUSR;}
+{chmod}                 {yylval.chmod = strdup(yytext); return TOK_CHMOD;}
+{cat}                   {yylval.cat = strdup(yytext); return TOK_CAT;}
+{rm}                    {yylval.rm = strdup(yytext); return TOK_RM;}
+{edit}                  {yylval.edit = strdup(yytext); return TOK_EDIT;}
+{ren}                   {yylval.ren = strdup(yytext); return TOK_REN;}
+{cp}                    {yylval.cp = strdup(yytext); return TOK_CP;}
+{mv}                    {yylval.mv = strdup(yytext); return TOK_MV;}
+{find}                  {yylval.find = strdup(yytext); return TOK_FIND;}
+{chown}                 {yylval.chown = strdup(yytext); return TOK_CHOWN;}
+{chgrp}                 {yylval.chgrp = strdup(yytext); return TOK_CHGRP;}
+{recovery}              {yylval.recovery = strdup(yytext); return TOK_RECOVERY;}
+{loss}                  {yylval.loss = strdup(yytext); return TOK_LOSS;}
+{exec}                  {yylval.exec = strdup(yytext); return TOK_EXEC;}
+{size}                  {yylval.size = strdup(yytext); return TOK_SIZE;}
+{path}                  {yylval.path = strdup(yytext); return TOK_PATH;}
+{name}                  {yylval.name = strdup(yytext); return TOK_NAME;}
+{id}                    {yylval.id = strdup(yytext); return TOK_ID;}
+{usr}                   {yylval.usr = strdup(yytext); return TOK_USR;}
+{pwd}                   {yylval.pwd = strdup(yytext); return TOK_PWD;}
+{grp}                   {yylval.grp = strdup(yytext); return TOK_GRP;}
+{ugo}                   {yylval.ugo = strdup(yytext); return TOK_UGO;}
+{filen}                 {yylval.filen = strdup(yytext); return TOK_FILEN;}
+{cont}                  {yylval.cont = strdup(yytext); return TOK_CONT;}
+{dest}                  {yylval.dest = strdup(yytext); return TOK_DEST;}
+{f}                     {yylval.f = strdup(yytext); return TOK_F;}
+{u}                     {yylval.u = strdup(yytext); return TOK_U;}
+{type}                  {yylval.type = strdup(yytext); return TOK_TYPE;}
+{delete}                {yylval.delete = strdup(yytext); return TOK_DELETE;}
+{add}                   {yylval.add = strdup(yytext); return TOK_ADD;}
+{fs}                    {yylval.fs = strdup(yytext); return TOK_FS;}
+{r}                     {yylval.r = strdup(yytext); return TOK_R;}
+{p}                     {yylval.p = strdup(yytext); return TOK_P;}
+{interrogacion}         {return TOK_INTERROGACION;}
+{cerradura}             {return TOK_CERRADURA;}
+{permisos}              {yylval.permisos = strdup(yytext); return TOK_PERMISOS;}
+{numero}                {yylval.numero = strdup(yytext); return TOK_NUMERO;}
+{ajuste}                {yylval.ajuste = strdup(yytext); return TOK_AJUSTE;}
+{unidades}              {yylval.unidades = strdup(yytext); return TOK_UNIDADES;}
+{ruta}                  {yylval.ruta = strdup(yytext); return TOK_RUTA;}
+{tipo}                  {yylval.tipo = strdup(yytext); return TOK_TIPO;}
+{capacidad}             {yylval.capacidad = strdup(yytext); return TOK_CAPACIDAD;}
+{sistema}               {yylval.sistema = strdup(yytext); return TOK_SISTEMA;}
+{identificador}         {yylval.identificador = strdup(yytext); return TOK_IDENTIFICADOR;}
+{igual}                 { return TOK_IGUAL;}
+{salto}                 { return TOK_SALTO;}
 
-
-{mkgrp}        {return TOK_MKGRP;}
-{rmgrp}        {return TOK_RMGRP;}
-{mkusr}        {return TOK_MKUSR;}
-{mkdir}        {return TOK_MKDIR;}
-{rmusr}        {return TOK_RMUSR;}
-{chmod}        {return TOK_CHMOD;}
-{touch}        {return TOK_TOUCH;}
-{cat}        {return TOK_CAT;}
-{rm}        {return TOK_RM;}
-{edit}        {return TOK_EDIT;}
-{ren}        {return TOK_REN;}
-{cp}        {return TOK_CP;}
-{mv}        {return TOK_MV;}
-{find}        {return TOK_FIND;}
-{chown}        {return TOK_CHOWN;}
-{chgrp}        {return TOK_CHGRP;}
-{recovery}        {return TOK_RECOVERY;}
-{loss}        {return TOK_LOSS;}
-{exec}        {return TOK_EXEC;}
-{size}        {return TOK_SIZE;}
-{path}        {return TOK_PATH;}
-{name}        {return TOK_NAME;}
-{id}        {return TOK_ID;}
-{usr}        {return TOK_USR;}
-{pwd}        {return TOK_PWD;}
-{grp}        {return TOK_GRP;}
-{ugo}        {return TOK_UGO;}
-{filen}        {return TOK_FILEN;}
-{cont}        {return TOK_CONT;}
-{dest}        {return TOK_DEST;}
-{f}        {return TOK_F;}
-{u}        {return TOK_U;}
-{type}        {return TOK_TYPE;}
-{delete}        {return TOK_DELETE;}
-{add}        {return TOK_ADD;}
-{fs}        {return TOK_FS;}
-{r}        {return TOK_R;}
-{p}        {return TOK_P;}
-{interrogacion}        {return TOK_INTERROGACION;}
-{cerradura}        {return TOK_CERRADURA;}
-{permisos}        {yylval.permisos = strdup(yytext); return TOK_PERMISOS;}
-{numero}        {yylval.numero = strdup(yytext);
-                 return TOK_NUMERO;}
-{ajuste}        {yylval.ajuste = strdup(yytext); return TOK_AJUSTE;}
-{unidades}        {yylval.unidades = strdup(yytext); return TOK_UNIDADES;}
-{ruta}        {yylval.ruta = strdup(yytext); return TOK_RUTA;}
-{tipo}        {yylval.tipo = strdup(yytext); return TOK_TIPO;}
-{capacidad}        {yylval.capacidad = strdup(yytext); return TOK_CAPACIDAD;}
-{sistema}        {yylval.sistema = strdup(yytext); return TOK_SISTEMA;}
-{identificador}        {yylval.identificador = strdup(yytext); return TOK_IDENTIFICADOR;}
-{igual}        { return TOK_IGUAL;}
-{salto}        { return TOK_SALTO;}
-
-{blanco}        ;
+{blanco}                ;
                  
-
- 
-.               {printf("ERROR LEXICO\n");
-                 return TOK_ERROR;}
-
-%%
