@@ -3,18 +3,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h> 
+#include "lista-simpleComando.h"
 
-typedef struct Comando{
-    char *nombre;
-    struct ListaParametros *paramList;
-    struct Comando *siguiente;
-}NodoComando;
 
-typedef struct comandList{
-    int tamano;
-    NodoComando* primerItem;
-    NodoComando* ultimoItem;
-}ListaComandos;
 
 NodoComando* getNodeComando(char *nombre, struct ListaParametros *ll){
     NodoComando* nodo = (NodoComando*)malloc(sizeof(NodoComando));
@@ -48,9 +39,12 @@ void addComando(ListaComandos* ll,NodoComando* nodo){
 void readComando(ListaComandos* ll){
     NodoComando* exploradorLista = ll->primerItem;
     while (exploradorLista != NULL){
-        printf("%s ", exploradorLista->nombre);
+        printf("%s %d", exploradorLista->nombre, ll->tamano);
+        //struct ListaParametros *aux = exploradorLista->paramList;
+        //readParametros(aux);
         exploradorLista = exploradorLista->siguiente;
     }
+   
 }
 
 bool searchComando(ListaComandos* ll, char *token){
@@ -66,17 +60,7 @@ bool searchComando(ListaComandos* ll, char *token){
     return bandera;
 }
 
-typedef struct parametros{
-    char *nombre;
-    char *valor;
-    struct parametros *siguiente;
-}NodoParametro;
 
-typedef struct paramList{
-    int tamano;
-    NodoParametro* primerItem;
-    NodoParametro* ultimoItem;
-}ListaParametros;
  
 NodoParametro* getNodeParametros(char *nombre, char *valor){
     NodoParametro* nodo = (NodoParametro*)malloc(sizeof(NodoParametro));
@@ -110,10 +94,11 @@ void addParametros(ListaParametros* ll,NodoParametro* nodo){
 void readParametros(ListaParametros* ll){
     NodoParametro* exploradorLista = ll->primerItem;
     while (exploradorLista != NULL){
-        printf("%s = %s ", exploradorLista->nombre, exploradorLista->valor);
+        printf("%s = %s %d", exploradorLista->nombre, exploradorLista->valor, ll->tamano);
         exploradorLista = exploradorLista->siguiente;
         
     }
+    
 }
 
 bool searchParametros(ListaParametros* ll, char *token){

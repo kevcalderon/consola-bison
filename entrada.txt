@@ -1,4 +1,3 @@
-Mkdisk -path=/home/user/Disco2.dk -size=3000 -U=K
-FDISK -path=/home/user/Disco2.dk -size=3000 -U=K
-MV -path=/home/user/Disco2.dk -size=3000 -U=K
-CP -path=/home/user/Disco2.dk -size=3000 -U=K
+Mkdisk -path=/home/user/Disco2.dk -size=20000 -U=M
+FDISK -size=2 -path=/home/user/disco1.dk -U=K
+FDISK -path=/home/user/disco1.dk -size=100000 -U=K

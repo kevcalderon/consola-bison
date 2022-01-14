@@ -179,7 +179,7 @@ extern int yydebug;
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 7 "calc.y"
+#line 8 "calc.y"
 
 
     char *mkdisk;

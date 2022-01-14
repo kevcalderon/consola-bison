@@ -72,7 +72,7 @@ sistema         "2FS"|"3FS"
 permisos        ([0-7][0-7][0-7])
 identificador   [0-9]{3}[Aa-zZ]
 igual           "="
-salto           "\n"
+salto           \n+
 
 
 %%
@@ -138,4 +138,7 @@ salto           "\n"
 {salto}                 { return TOK_SALTO;}
 
 {blanco}                ;
-                 
+.               {printf("ERROR LEXICO\n");
+                 return TOK_ERROR;}
+
+%%

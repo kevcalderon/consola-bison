@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include "edd/lista-simpleComando.c"
 extern FILE *yyin;
+void yyerror(char *s);
 %}
 
 %union{
@@ -145,22 +146,22 @@ extern FILE *yyin;
 %%
 inicio:     instrucciones{ 
                 free($1);
-                
+                return 0;
             }
 ;
 
-instrucciones:  instruccion instrucciones{
-                    $2 = obtenerNuevaListaComandos();
-                    addComando($2, $1);
-                    readComando($2);
-                    printf("termina un comando \n");
-                    $$ = $2;
+instrucciones:  instrucciones instruccion{
+                    $1 = obtenerNuevaListaComandos();
+                    addComando($1, $2);
+                    readComando($1);
+                    printf("termina un comando 1\n");
+                    $$ = $1;
                     }
                 |instruccion{ 
                     ListaComandos* auxComand = obtenerNuevaListaComandos();
                     addComando(auxComand, $1);
                     readComando(auxComand);
-                    printf("termina un comando \n");
+                    printf("termina un comando 2\n");
                     $$ = auxComand; 
                 }
 ;
@@ -249,18 +250,18 @@ instruccion:        TOK_MKDISK paramslist TOK_SALTO{
 ;
 
 
-paramslist:         params paramslist{
-                        $2 = obtenerNuevaListaParametros();
-                        addParametros($2, $1);
-                        readParametros($2);
-                        free($2);
-                        $$ = $2;
+paramslist:         paramslist params{
+                        $1 = obtenerNuevaListaParametros();
+                        addParametros($1, $2);
+                        readParametros($1);
+                        free($1);
+                        $$ = $1;
                     }
                     |params{
                         ListaParametros* auxParamsList = obtenerNuevaListaParametros();
                         addParametros(auxParamsList, $1);
                         readParametros(auxParamsList);
-                        free(auxParamsList);
+                        //free(auxParamsList);
                         $$ = auxParamsList;
                     }
 ;
@@ -342,6 +343,6 @@ int main(){
 }
 
 void yyerror(char* s){
-    fprintf(stderr, "%s\n" , s);
+    printf("%s\n" , s);
 }
 
