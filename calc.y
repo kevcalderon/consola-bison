@@ -1,339 +1,566 @@
 %{
 #include <stdio.h>
-#include "edd/lista-simpleComando.c"
 extern FILE *yyin;
 void yyerror(char *s);
+int yylex();
 %}
 
 %union{
-
-    char *mkdisk;
-    char *rmdisk;
-    char *fdisk;
-    char *mount;
-    char *unmount;
-    char *mkfs;
-    char *login;
-    char *logout;
-    char *mkgrp;
-    char *rmgrp;
-    char *mkusr;
-    char *rmusr;
-    char *chmod;
-    char *touch;
-    char *mkdir;
-    char *rm;
-    char *edit;
-    char *ren;
-    char *cp;
-    char *mv;
-    char *find;
-    char *chown;
-    char *chgrp;
-    char *recovery;
-    char *loss;
-    char *exec;
-    char *size;
-    char *path;
-    char *name;
-    char *id;
-    char *usr;
-    char *pwd;
-    char *grp;
-    char *ugo;
-    char *cat;
-    char *filen;
-    char *stdin;
-    char *cont;
-    char *dest;
-    char *f;
-    char *u;
-    char *type;
-    char *delete;
-    char *fs;
-    char *r;
-    char *p;
-    char *add;
-    char *interrogacion;
-    char *cerradura;
-    char *numero;
-    char *ajuste;
-    char *ruta;
-    char *unidades;
-    char *tipo;
-    char *nombre;
-    char *capacidad;
-    char *sistema;
-    char *permisos;
-    char *identificador;
-    struct NodoParametro *paramNode;
-    struct NodoComando *comandNode;
-    struct ListaComandos *comandList;
-    struct ListaParametros *paramList;
+    char *entrada;
 }
-%token <numero> TOK_NUMERO
-%token <ajuste>TOK_AJUSTE
-%token <ruta>TOK_RUTA
-%token <unidades>TOK_UNIDADES
-%token <tipo>TOK_TIPO
-%token <nombre>TOK_NOMBRE
-%token <capacidad>TOK_CAPACIDAD
-%token <sistema>TOK_SISTEMA
-%token <permisos>TOK_PERMISOS
-%token <identificador>TOK_IDENTIFICADOR
 
-%token <mkdisk> TOK_MKDISK
-%token <rmdisk> TOK_RMDISK
-%token <fdisk> TOK_FDISK
-%token <mount> TOK_MOUNT
-%token <unmount> TOK_UNMOUNT
-%token <mkfs> TOK_MKFS
-%token <login> TOK_LOGIN
-%token <logout> TOK_LOGOUT
-%token <mkgrp> TOK_MKGRP
-%token <rmgrp> TOK_RMGRP
-%token <mkusr> TOK_MKUSR
-%token <rmusr> TOK_RMUSR
-%token <chmod> TOK_CHMOD
-%token <touch> TOK_TOUCH
-%token <mkdir> TOK_MKDIR
-%token <rm> TOK_RM
-%token <edit> TOK_EDIT
-%token <ren> TOK_REN
-%token <cp> TOK_CP
-%token <mv> TOK_MV
-%token <find> TOK_FIND
-%token <chown> TOK_CHOWN
-%token <chgrp> TOK_CHGRP
-%token <recovery> TOK_RECOVERY
-%token <loss> TOK_LOSS
-%token <exec> TOK_EXEC
-%token <size> TOK_SIZE
-%token <path> TOK_PATH
-%token <name> TOK_NAME
-%token <id> TOK_ID
-%token <usr> TOK_USR
-%token <pwd> TOK_PWD
-%token <grp> TOK_GRP
-%token <ugo> TOK_UGO
-%token <cat> TOK_CAT
-%token <filen> TOK_FILEN
-%token <stdin> TOK_STDIN
-%token <cont> TOK_CONT
-%token <dest> TOK_DEST
-%token <f> TOK_F
-%token <u> TOK_U
-%token <type> TOK_TYPE
-%token <delete> TOK_DELETE
-%token <add> TOK_ADD
-%token <fs> TOK_FS
-%token <r> TOK_R
-%token <p> TOK_P
-%token <interrogacion> TOK_INTERROGACION
-%token <cerradura> TOK_CERRADURA
-%token TOK_IGUAL
+%token <entrada> TOK_NUMERO
+%token <entrada> TOK_AJUSTE
+%token <entrada> TOK_RUTA
+%token <entrada> TOK_UNIDADES
+%token <entrada> TOK_TIPO
+%token <entrada> TOK_NOMBRE
+%token <entrada> TOK_CAPACIDAD
+%token <entrada> TOK_SISTEMA
+%token <entrada> TOK_IDENTIFICADOR
+
+%token <entrada> TOK_MKDISK
+%token <entrada> TOK_RMDISK
+%token <entrada> TOK_FDISK
+%token <entrada> TOK_MOUNT
+%token <entrada> TOK_UNMOUNT
+%token <entrada> TOK_MKFS
+%token <entrada> TOK_LOGIN
+%token <entrada> TOK_LOGOUT
+%token <entrada> TOK_MKGRP
+%token <entrada> TOK_RMGRP
+%token <entrada> TOK_MKUSR
+%token <entrada> TOK_RMUSR
+%token <entrada> TOK_CHMOD
+%token <entrada> TOK_TOUCH
+%token <entrada> TOK_MKDIR
+%token <entrada> TOK_RM
+%token <entrada> TOK_EDIT
+%token <entrada> TOK_REN
+%token <entrada> TOK_CP
+%token <entrada> TOK_MV
+%token <entrada> TOK_FIND
+%token <entrada> TOK_CHOWN
+%token <entrada> TOK_CHGRP
+%token <entrada> TOK_RECOVERY
+%token <entrada> TOK_LOSS
+%token <entrada> TOK_EXEC
+%token <entrada> TOK_SIZE
+%token <entrada> TOK_PATH
+%token <entrada> TOK_NAME
+%token <entrada> TOK_ID
+%token <entrada> TOK_USR
+%token <entrada> TOK_PWD
+%token <entrada> TOK_GRP
+%token <entrada> TOK_UGO
+%token <entrada> TOK_CAT
+%token <entrada> TOK_FILEN
+%token <entrada> TOK_STDIN
+%token <entrada> TOK_CONT
+%token <entrada> TOK_DEST
+%token <entrada> TOK_F
+%token <entrada> TOK_U
+%token <entrada> TOK_TYPE
+%token <entrada> TOK_DELETE
+%token <entrada> TOK_ADD
+%token <entrada> TOK_FS
+%token <entrada> TOK_R
+%token <entrada> TOK_P
+%token <entrada> TOK_IGUAL
+
 %token TOK_SALTO
 
-%type <paramNode> params
-%type <comandNode> instruccion
-%type <paramList> paramslist
-%type <comandList> instrucciones
 
 
 %start inicio
 
 
 %%
-inicio:     instrucciones{ 
-                free($1);
-                return 0;
+inicio:     instrucciones{
+                
             }
 ;
 
 instrucciones:  instrucciones instruccion{
-                    $1 = obtenerNuevaListaComandos();
-                    addComando($1, $2);
-                    readComando($1);
-                    printf("termina un comando 1\n");
-                    $$ = $1;
+                    printf("Analisis exitoso\n");
                     }
                 |instruccion{ 
-                    ListaComandos* auxComand = obtenerNuevaListaComandos();
-                    addComando(auxComand, $1);
-                    readComando(auxComand);
-                    printf("termina un comando 2\n");
-                    $$ = auxComand; 
+                    printf("Analisis exitoso \n"); 
                 }
+                |error
 ;
 
-instruccion:        TOK_MKDISK paramslist TOK_SALTO{
-                        $$ = getNodeComando($1,$2);
+instruccion:        TOK_MKDISK paramslist1 TOK_SALTO{
+                        printf("comando mkdisk\t");
                     }
-                    |TOK_RMDISK paramslist TOK_SALTO{
-                        $$ = getNodeComando($1,$2);
+                    |TOK_RMDISK paramslist2 TOK_SALTO{
+                        printf("comando rmdisk\t");
                     }
-                    |TOK_FDISK paramslist TOK_SALTO{
-                        $$ = getNodeComando($1,$2);
+                    |TOK_FDISK paramslist3 TOK_SALTO{
+                        printf("comando fdisk\t");
                     }
-                    |TOK_MOUNT paramslist TOK_SALTO{
-                        $$ = getNodeComando($1,$2);
+                    |TOK_MOUNT paramslist4 TOK_SALTO{
+                        printf("comando mount\t");
                     }
-                    |TOK_UNMOUNT paramslist TOK_SALTO{
-                        $$ = getNodeComando($1,$2);
+                    |TOK_UNMOUNT paramslist5 TOK_SALTO{
+                        printf("comando unmount\t");
                     }
-                    |TOK_MKFS paramslist TOK_SALTO{
-                        $$ = getNodeComando($1,$2);
+                    |TOK_MKFS paramslist6 TOK_SALTO{
+                        printf("comando mkfs\t");
                     }
-                    |TOK_LOGIN paramslist TOK_SALTO{
-                        $$ = getNodeComando($1,$2);
+                    |TOK_LOGIN paramslist7 TOK_SALTO{
+                        printf("comando login\t");
                     }
                     |TOK_LOGOUT{
-                        $$ = getNodeComando($1,NULL);
+                        printf("comando logout\t");
                     }
-                    |TOK_MKGRP paramslist TOK_SALTO{
-                        $$ = getNodeComando($1,$2);
+                    |TOK_MKGRP paramslist8 TOK_SALTO{
+                        printf("comando mkgrp\t");
                     }
-                    |TOK_RMGRP paramslist TOK_SALTO{
-                        $$ = getNodeComando($1,$2);
+                    |TOK_RMGRP paramslist9 TOK_SALTO{
+                        printf("comando rmgrp\t");
                     }
-                    |TOK_MKUSR paramslist TOK_SALTO{
-                        $$ = getNodeComando($1,$2);
+                    |TOK_MKUSR paramslist10 TOK_SALTO{
+                        printf("comando mkusr\t");
                     }  
-                    |TOK_RMUSR paramslist TOK_SALTO{
-                        $$ = getNodeComando($1,$2);
+                    |TOK_RMUSR paramslist11 TOK_SALTO{
+                        printf("comando rmusr\t");
                     }
-                    |TOK_CHMOD paramslist TOK_SALTO{
-                        $$ = getNodeComando($1,$2);
+                    |TOK_CHMOD paramslist12 TOK_SALTO{
+                        printf("comando chmod\t");
                     }
-                    |TOK_TOUCH paramslist TOK_SALTO{
-                        $$ = getNodeComando($1,$2);
+                    |TOK_TOUCH paramslist13 TOK_SALTO{
+                        printf("comando touch\t");
                     }
-                    |TOK_CAT paramslist TOK_SALTO{
-                        $$ = getNodeComando($1,$2);
+                    |TOK_CAT paramslist14 TOK_SALTO{
+                        printf("comando cat\t");
                     }
-                    |TOK_RM paramslist TOK_SALTO{
-                        $$ = getNodeComando($1,$2);
+                    |TOK_RM paramslist15 TOK_SALTO{
+                        printf("comando rm\t");
                     }
-                    |TOK_EDIT paramslist TOK_SALTO{
-                        $$ = getNodeComando($1,$2);
+                    |TOK_EDIT paramslist16 TOK_SALTO{
+                        printf("comando edit\t");
                     }
-                    |TOK_REN paramslist TOK_SALTO{
-                        $$ = getNodeComando($1,$2);
+                    |TOK_REN paramslist17 TOK_SALTO{
+                        printf("comando ren\t");
                     }
-                    |TOK_MKDIR paramslist TOK_SALTO{
-                        $$ = getNodeComando($1,$2);
+                    |TOK_MKDIR paramslist18 TOK_SALTO{
+                        printf("comando mkdir\t");
                     }
-                    |TOK_CP paramslist TOK_SALTO{
-                        $$ = getNodeComando($1,$2);
+                    |TOK_CP paramslist19 TOK_SALTO{
+                        printf("comando cp\t");
                     }
-                    |TOK_MV paramslist TOK_SALTO{
-                        $$ = getNodeComando($1,$2);
+                    |TOK_MV paramslist20 TOK_SALTO{
+                        printf("comando mv\t");
                     }
-                    |TOK_FIND paramslist TOK_SALTO{
-                        $$ = getNodeComando($1,$2);
+                    |TOK_FIND paramslist21 TOK_SALTO{
+                        printf("comando find\t");
                     }
-                    |TOK_CHOWN paramslist TOK_SALTO{
-                        $$ = getNodeComando($1,$2);
+                    |TOK_CHOWN paramslist22 TOK_SALTO{
+                        printf("comando chown\t");
                     }
-                    |TOK_CHGRP paramslist TOK_SALTO{
-                        $$ = getNodeComando($1,$2);
+                    |TOK_CHGRP paramslist23 TOK_SALTO{
+                        printf("comando chgrp\t");
                     }
-                    |TOK_RECOVERY paramslist TOK_SALTO{
-                        $$ = getNodeComando($1,$2);
+                    |TOK_RECOVERY paramslist24 TOK_SALTO{
+                        printf("comando recovery\t");
                     }
-                    |TOK_LOSS paramslist TOK_SALTO{
-                        $$ = getNodeComando($1,$2);
+                    |TOK_LOSS paramslist25 TOK_SALTO{
+                        printf("comando loss\t");
                     }
-                    |TOK_EXEC paramslist TOK_SALTO{
-                        $$ = getNodeComando($1,$2);
-                    }
-;
-
-
-paramslist:         paramslist params{
-                        $1 = obtenerNuevaListaParametros();
-                        addParametros($1, $2);
-                        readParametros($1);
-                        free($1);
-                        $$ = $1;
-                    }
-                    |params{
-                        ListaParametros* auxParamsList = obtenerNuevaListaParametros();
-                        addParametros(auxParamsList, $1);
-                        readParametros(auxParamsList);
-                        //free(auxParamsList);
-                        $$ = auxParamsList;
+                    |TOK_EXEC paramslist26 TOK_SALTO{
+                        printf("comando exec\t"); 
                     }
 ;
 
-params:             TOK_PATH TOK_IGUAL TOK_RUTA{
-                        $$ = getNodeParametros($1, $3);
+paramslist1:        paramslist1 params1{
                     }
-                    |TOK_SIZE TOK_IGUAL TOK_NUMERO{
-                        $$ = getNodeParametros($1, $3);
+                    |params1{                        
                     }
-                    |TOK_U TOK_IGUAL TOK_UNIDADES{
-                        $$ = getNodeParametros($1, $3);
+;
+
+paramslist2:        paramslist2 params2{
+                    }
+                    |params2{                        
+                    }
+;
+
+paramslist3:        paramslist3 params3{
+                    }
+                    |params3{                        
+                    }
+;
+
+paramslist4:        paramslist4 params4{
+                    }
+                    |params4{                        
+                    }
+;
+
+paramslist5:        paramslist5 params5{
+                    }
+                    |params5{                        
+                    }
+;
+
+paramslist6:        paramslist6 params6{
+                    }
+                    |params6{                        
+                    }
+;
+
+paramslist7:        paramslist7 params7{
+                    }
+                    |params7{                        
+                    }
+;
+
+paramslist8:        paramslist8 params8{
+                    }
+                    |params8{                        
+                    }
+;
+
+paramslist9:        paramslist9 params9{
+                    }
+                    |params9{                        
+                    }
+;
+
+paramslist10:       paramslist10 params10{
+                    }
+                    |params10{                        
+                    }
+;
+
+paramslist11:       paramslist11 params11{
+                    }
+                    |params11{                        
+                    }
+;
+
+paramslist12:       paramslist12 params12{
+                    }
+                    |params12{                        
+                    }
+;
+
+paramslist13:       paramslist13 params13{
+                    }
+                    |params13{                        
+                    }
+;
+
+paramslist14:       paramslist14 params14{
+                    }
+                    |params14{                        
+                    }
+;
+
+paramslist15:       paramslist15 params15{
+                    }
+                    |params15{                        
+                    }
+;
+
+paramslist16:       paramslist16 params16{
+                    }
+                    |params16{                        
+                    }
+;
+
+paramslist17:       paramslist17 params17{
+                    }
+                    |params17{                        
+                    }
+;
+
+paramslist18:       paramslist18 params18{
+                    }
+                    |params18{                        
+                    }
+;
+
+paramslist19:       paramslist19 params19{
+                    }
+                    |params19{                        
+                    }
+;
+
+paramslist20:       paramslist20 params20{
+                    }
+                    |params20{                        
+                    }
+;
+
+paramslist21:       paramslist21 params21{
+                    }
+                    |params21{                        
+                    }
+;
+
+paramslist22:       paramslist22 params22{
+                    }
+                    |params22{                        
+                    }
+;
+
+paramslist23:       paramslist23 params23{
+                    }
+                    |params23{                        
+                    }
+;
+
+paramslist24:       paramslist24 params24{
+                    }
+                    |params24{                        
+                    }
+;
+
+paramslist25:       paramslist25 params25{
+                    }
+                    |params25{                        
+                    }
+;
+
+paramslist26:       paramslist26 params26{
+                    }
+                    |params26{                        
+                    }
+;
+
+params1:            TOK_SIZE TOK_IGUAL TOK_NUMERO{
+                        printf("parametro size\t");
+                    }
+                    |TOK_PATH TOK_IGUAL TOK_RUTA{
+                        printf("parametro path\t");
                     }
                     |TOK_F TOK_IGUAL TOK_AJUSTE{
-                        $$ = getNodeParametros($1, $3);
+                        printf("parametro f\t");
                     }
-                    |TOK_NAME TOK_IGUAL TOK_NOMBRE{
-                        $$ = getNodeParametros($1, $3);
-                    }
-                    |TOK_TYPE TOK_IGUAL TOK_TIPO{
-                        $$ = getNodeParametros($1, $3);
-                    }
-                    |TOK_DELETE TOK_IGUAL TOK_CAPACIDAD{
-                        $$ = getNodeParametros($1, $3);
-                    }
-                    |TOK_ADD TOK_IGUAL TOK_NUMERO{
-                        $$ = getNodeParametros($1, $3);
-                    }
-                    |TOK_ID TOK_IGUAL TOK_IDENTIFICADOR{
-                        $$ = getNodeParametros($1, $3);
-                    }
-                    |TOK_TYPE TOK_IGUAL TOK_CAPACIDAD{
-                        $$ = getNodeParametros($1, $3);
-                    }
-                    |TOK_FS TOK_IGUAL TOK_SISTEMA{
-                        $$ = getNodeParametros($1, $3);
-                    }
-                    |TOK_USR TOK_IGUAL TOK_NOMBRE{
-                        $$ = getNodeParametros($1, $3);
-                    }
-                    |TOK_PWD TOK_IGUAL TOK_NOMBRE{
-                        $$ = getNodeParametros($1, $3);
-                    }  
-                    |TOK_GRP TOK_IGUAL TOK_NOMBRE{
-                        $$ = getNodeParametros($1, $3);
-                    }
-                    |TOK_UGO TOK_IGUAL TOK_PERMISOS{
-                        $$ = getNodeParametros($1, $3);
-                    }
-                    |TOK_R{
-                        $$ = getNodeParametros($1, NULL);
-                    }
-                    |TOK_P{
-                        $$ = getNodeParametros($1, NULL);
-                    }
-                    |TOK_STDIN{
-                        $$ = getNodeParametros($1, NULL);
-                    }
-                    |TOK_CONT TOK_IGUAL TOK_RUTA{
-                        $$ = getNodeParametros($1, $3);
-                    }
-                    |TOK_DEST TOK_IGUAL TOK_RUTA{
-                        $$ = getNodeParametros($1, $3);
-                    }
-                    |TOK_FILEN TOK_IGUAL TOK_RUTA{
-                        $$ = getNodeParametros($1, $3);
+                    |TOK_U TOK_IGUAL TOK_UNIDADES{
+                        printf("parametro u\t");
                     }
 ;
 
+params2:            TOK_PATH TOK_IGUAL TOK_RUTA{
+                        printf("parametro path\t");
+                    }
+;
+
+params3:            TOK_SIZE TOK_IGUAL TOK_NUMERO{
+                        printf("parametro size\t");
+                    }
+                    |TOK_PATH TOK_IGUAL TOK_RUTA{
+                        printf("parametro path\t");
+                    }
+                    |TOK_NAME TOK_IGUAL TOK_NOMBRE{
+                        printf("parametro name\t");
+                    }
+                    |TOK_F TOK_IGUAL TOK_AJUSTE{
+                        printf("parametro f\t");
+                    }
+                    |TOK_U TOK_IGUAL TOK_UNIDADES{
+                        printf("parametro u\t");
+                    }
+                    |TOK_DELETE TOK_IGUAL TOK_CAPACIDAD{
+                        printf("parametro delete\t");
+                    }
+                    |TOK_TYPE TOK_IGUAL TOK_TIPO{
+                        printf("parametro type\t");
+                    }
+                    |TOK_ADD TOK_IGUAL TOK_NUMERO{
+                        printf("parametro add\t");
+                    }
+;
+
+params4:            TOK_PATH TOK_IGUAL TOK_RUTA{
+                        printf("parametro path\t");
+                    }
+                    |TOK_NAME TOK_IGUAL TOK_NOMBRE{
+                        printf("parametro name\t");
+                    }
+;
+
+params5:            TOK_ID TOK_IGUAL TOK_IDENTIFICADOR{
+                        printf("parametro id\t");
+                    }
+;
+
+params6:            TOK_ID TOK_IGUAL TOK_IDENTIFICADOR{
+                        printf("parametro id\t");
+                    }
+                    |TOK_TYPE TOK_IGUAL TOK_CAPACIDAD{
+                        printf("parametro type\t");
+                    }
+                    |TOK_FS TOK_IGUAL TOK_SISTEMA{
+                        printf("parametro fs\t");
+                    }
+;
+
+params7:            TOK_USR TOK_IGUAL TOK_NOMBRE{
+                        printf("parametro usr\t");
+                    }
+                    |TOK_PWD TOK_IGUAL TOK_NOMBRE{
+                        printf("parametro pwd\t");
+                    }
+                    |TOK_ID TOK_IGUAL TOK_IDENTIFICADOR{
+                        printf("parametro id\t");
+                    }
+;
+
+params8:            TOK_NAME TOK_IGUAL TOK_NOMBRE{
+                        printf("parametro name\t");
+                    }
+;
+
+params9:            TOK_NAME TOK_IGUAL TOK_NOMBRE{
+                        printf("parametro name\t");
+                    }
+;
+
+params10:           TOK_USR TOK_IGUAL TOK_NOMBRE{
+                        printf("parametro usr\t");
+                    }
+                    |TOK_PWD TOK_IGUAL TOK_NOMBRE{
+                        printf("parametro pwd\t");
+                    }
+                    |TOK_GRP TOK_IGUAL TOK_NOMBRE{
+                        printf("parametro grp\t");
+                    }
+;
+
+params11:            TOK_USR TOK_IGUAL TOK_NOMBRE{
+                        printf("parametro usr\t");
+                    }
+;
+
+params12:           TOK_PATH TOK_IGUAL TOK_RUTA{
+                        printf("parametro path\t");
+                    }
+                    |TOK_UGO TOK_IGUAL TOK_NUMERO{
+                        printf("parametro ugo\t");
+                    }
+                    |TOK_R{
+                        printf("parametro r\t");
+                    }
+;
+
+params13:           TOK_PATH TOK_IGUAL TOK_RUTA{
+                        printf("parametro path\t");
+                    }
+                    |TOK_R{
+                        printf("parametro r\t");
+                    }
+                    |TOK_SIZE TOK_IGUAL TOK_NUMERO{
+                        printf("parametro size\t");
+                    }
+                    |TOK_CONT TOK_IGUAL TOK_RUTA{
+                        printf("parametro cont\t");
+                    }
+                    |TOK_STDIN{
+                        printf("parametro stdin\t");
+                    }
+;
+
+params14:           TOK_FILEN TOK_IGUAL TOK_RUTA{
+                        printf("parametro filen\t");
+                    }
+;
+
+params15:           TOK_PATH TOK_IGUAL TOK_RUTA{
+                        printf("parametro path\t");
+                    }
+;
+
+params16:           TOK_PATH TOK_IGUAL TOK_RUTA{
+                        printf("parametro path\t");
+                    }
+                    |TOK_CONT TOK_IGUAL TOK_RUTA{
+                        printf("parametro cont\t");
+                    }
+                    |TOK_STDIN{
+                        printf("parametro stdin\t");
+                    }
+;
+
+params17:           TOK_PATH TOK_IGUAL TOK_RUTA{
+                        printf("parametro path\t");
+                    }
+                    |TOK_NAME TOK_IGUAL TOK_NOMBRE{
+                        printf("parametro name\t");
+                    }
+;
+
+params18:           TOK_PATH TOK_IGUAL TOK_RUTA{
+                        printf("parametro path\t");
+                    }
+                    |TOK_P{
+                        printf("parametro p\t");
+                    }
+;
+
+params19:           TOK_PATH TOK_IGUAL TOK_RUTA{
+                        printf("parametro path\t");
+                    }
+                    |TOK_DEST TOK_IGUAL TOK_RUTA{
+                        printf("parametro dest\t");
+                    }
+;
+
+params20:           TOK_PATH TOK_IGUAL TOK_RUTA{
+                        printf("parametro path\t");
+                    }
+                    |TOK_DEST TOK_IGUAL TOK_RUTA{
+                        printf("parametro dest\t");
+                    }
+;
+
+params21:           TOK_PATH TOK_IGUAL TOK_RUTA{
+                        printf("parametro path\t");
+                    }
+                    |TOK_NAME TOK_IGUAL TOK_NOMBRE{
+                        printf("parametro name\t");
+                    }
+;
+
+params22:           TOK_PATH TOK_IGUAL TOK_RUTA{
+                        printf("parametro path\t");
+                    }
+                    |TOK_USR TOK_IGUAL TOK_NOMBRE{
+                        printf("parametro usr\t");
+                    }
+                    |TOK_R{
+                        printf("parametro r\t");
+                    }
+;
+
+params23:           TOK_USR TOK_IGUAL TOK_NOMBRE{
+                        printf("parametro usr\t");
+                    }
+                    |TOK_GRP TOK_IGUAL TOK_NOMBRE{
+                        printf("parametro grp\t");
+                    }
+;
+
+params24:           TOK_ID TOK_IGUAL TOK_IDENTIFICADOR{
+                        printf("parametro id\t");
+                    }
+;
+
+params25:           TOK_ID TOK_IGUAL TOK_IDENTIFICADOR{
+                        printf("parametro id\t");
+                    }
+;
+
+params26:           TOK_PATH TOK_IGUAL TOK_RUTA{
+                        printf("parametro path\t");
+                    }
+;
 
 %%
 int main(){
+    
     FILE *file = fopen("entrada.txt", "r");
     yyin = file;
     yyparse();

@@ -1,3 +1,3 @@
-Mkdisk -path=/home/user/Disco2.dk -size=20000 -U=M
-FDISK -size=2 -path=/home/user/disco1.dk -U=K
-FDISK -path=/home/user/disco1.dk -size=100000 -U=K
+mkdisk -size=200 -path=/ruta1/folder1/disco1.dk -U=M -f=FF
+FDISK -path=/ruta1/folder1/disco2.dk -U=K -f=WF -size=20000 -name=particion1
+MOUNT  -path=/ruta1/folder1/disco3.dk -name=part2

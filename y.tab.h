@@ -57,59 +57,56 @@ extern int yydebug;
     TOK_NOMBRE = 263,
     TOK_CAPACIDAD = 264,
     TOK_SISTEMA = 265,
-    TOK_PERMISOS = 266,
-    TOK_IDENTIFICADOR = 267,
-    TOK_MKDISK = 268,
-    TOK_RMDISK = 269,
-    TOK_FDISK = 270,
-    TOK_MOUNT = 271,
-    TOK_UNMOUNT = 272,
-    TOK_MKFS = 273,
-    TOK_LOGIN = 274,
-    TOK_LOGOUT = 275,
-    TOK_MKGRP = 276,
-    TOK_RMGRP = 277,
-    TOK_MKUSR = 278,
-    TOK_RMUSR = 279,
-    TOK_CHMOD = 280,
-    TOK_TOUCH = 281,
-    TOK_MKDIR = 282,
-    TOK_RM = 283,
-    TOK_EDIT = 284,
-    TOK_REN = 285,
-    TOK_CP = 286,
-    TOK_MV = 287,
-    TOK_FIND = 288,
-    TOK_CHOWN = 289,
-    TOK_CHGRP = 290,
-    TOK_RECOVERY = 291,
-    TOK_LOSS = 292,
-    TOK_EXEC = 293,
-    TOK_SIZE = 294,
-    TOK_PATH = 295,
-    TOK_NAME = 296,
-    TOK_ID = 297,
-    TOK_USR = 298,
-    TOK_PWD = 299,
-    TOK_GRP = 300,
-    TOK_UGO = 301,
-    TOK_CAT = 302,
-    TOK_FILEN = 303,
-    TOK_STDIN = 304,
-    TOK_CONT = 305,
-    TOK_DEST = 306,
-    TOK_F = 307,
-    TOK_U = 308,
-    TOK_TYPE = 309,
-    TOK_DELETE = 310,
-    TOK_ADD = 311,
-    TOK_FS = 312,
-    TOK_R = 313,
-    TOK_P = 314,
-    TOK_INTERROGACION = 315,
-    TOK_CERRADURA = 316,
-    TOK_IGUAL = 317,
-    TOK_SALTO = 318
+    TOK_IDENTIFICADOR = 266,
+    TOK_MKDISK = 267,
+    TOK_RMDISK = 268,
+    TOK_FDISK = 269,
+    TOK_MOUNT = 270,
+    TOK_UNMOUNT = 271,
+    TOK_MKFS = 272,
+    TOK_LOGIN = 273,
+    TOK_LOGOUT = 274,
+    TOK_MKGRP = 275,
+    TOK_RMGRP = 276,
+    TOK_MKUSR = 277,
+    TOK_RMUSR = 278,
+    TOK_CHMOD = 279,
+    TOK_TOUCH = 280,
+    TOK_MKDIR = 281,
+    TOK_RM = 282,
+    TOK_EDIT = 283,
+    TOK_REN = 284,
+    TOK_CP = 285,
+    TOK_MV = 286,
+    TOK_FIND = 287,
+    TOK_CHOWN = 288,
+    TOK_CHGRP = 289,
+    TOK_RECOVERY = 290,
+    TOK_LOSS = 291,
+    TOK_EXEC = 292,
+    TOK_SIZE = 293,
+    TOK_PATH = 294,
+    TOK_NAME = 295,
+    TOK_ID = 296,
+    TOK_USR = 297,
+    TOK_PWD = 298,
+    TOK_GRP = 299,
+    TOK_UGO = 300,
+    TOK_CAT = 301,
+    TOK_FILEN = 302,
+    TOK_STDIN = 303,
+    TOK_CONT = 304,
+    TOK_DEST = 305,
+    TOK_F = 306,
+    TOK_U = 307,
+    TOK_TYPE = 308,
+    TOK_DELETE = 309,
+    TOK_ADD = 310,
+    TOK_FS = 311,
+    TOK_R = 312,
+    TOK_P = 313,
+    TOK_IGUAL = 314,
+    TOK_SALTO = 315
   };
 #endif
 /* Tokens.  */
@@ -121,59 +118,56 @@ extern int yydebug;
 #define TOK_NOMBRE 263
 #define TOK_CAPACIDAD 264
 #define TOK_SISTEMA 265
-#define TOK_PERMISOS 266
-#define TOK_IDENTIFICADOR 267
-#define TOK_MKDISK 268
-#define TOK_RMDISK 269
-#define TOK_FDISK 270
-#define TOK_MOUNT 271
-#define TOK_UNMOUNT 272
-#define TOK_MKFS 273
-#define TOK_LOGIN 274
-#define TOK_LOGOUT 275
-#define TOK_MKGRP 276
-#define TOK_RMGRP 277
-#define TOK_MKUSR 278
-#define TOK_RMUSR 279
-#define TOK_CHMOD 280
-#define TOK_TOUCH 281
-#define TOK_MKDIR 282
-#define TOK_RM 283
-#define TOK_EDIT 284
-#define TOK_REN 285
-#define TOK_CP 286
-#define TOK_MV 287
-#define TOK_FIND 288
-#define TOK_CHOWN 289
-#define TOK_CHGRP 290
-#define TOK_RECOVERY 291
-#define TOK_LOSS 292
-#define TOK_EXEC 293
-#define TOK_SIZE 294
-#define TOK_PATH 295
-#define TOK_NAME 296
-#define TOK_ID 297
-#define TOK_USR 298
-#define TOK_PWD 299
-#define TOK_GRP 300
-#define TOK_UGO 301
-#define TOK_CAT 302
-#define TOK_FILEN 303
-#define TOK_STDIN 304
-#define TOK_CONT 305
-#define TOK_DEST 306
-#define TOK_F 307
-#define TOK_U 308
-#define TOK_TYPE 309
-#define TOK_DELETE 310
-#define TOK_ADD 311
-#define TOK_FS 312
-#define TOK_R 313
-#define TOK_P 314
-#define TOK_INTERROGACION 315
-#define TOK_CERRADURA 316
-#define TOK_IGUAL 317
-#define TOK_SALTO 318
+#define TOK_IDENTIFICADOR 266
+#define TOK_MKDISK 267
+#define TOK_RMDISK 268
+#define TOK_FDISK 269
+#define TOK_MOUNT 270
+#define TOK_UNMOUNT 271
+#define TOK_MKFS 272
+#define TOK_LOGIN 273
+#define TOK_LOGOUT 274
+#define TOK_MKGRP 275
+#define TOK_RMGRP 276
+#define TOK_MKUSR 277
+#define TOK_RMUSR 278
+#define TOK_CHMOD 279
+#define TOK_TOUCH 280
+#define TOK_MKDIR 281
+#define TOK_RM 282
+#define TOK_EDIT 283
+#define TOK_REN 284
+#define TOK_CP 285
+#define TOK_MV 286
+#define TOK_FIND 287
+#define TOK_CHOWN 288
+#define TOK_CHGRP 289
+#define TOK_RECOVERY 290
+#define TOK_LOSS 291
+#define TOK_EXEC 292
+#define TOK_SIZE 293
+#define TOK_PATH 294
+#define TOK_NAME 295
+#define TOK_ID 296
+#define TOK_USR 297
+#define TOK_PWD 298
+#define TOK_GRP 299
+#define TOK_UGO 300
+#define TOK_CAT 301
+#define TOK_FILEN 302
+#define TOK_STDIN 303
+#define TOK_CONT 304
+#define TOK_DEST 305
+#define TOK_F 306
+#define TOK_U 307
+#define TOK_TYPE 308
+#define TOK_DELETE 309
+#define TOK_ADD 310
+#define TOK_FS 311
+#define TOK_R 312
+#define TOK_P 313
+#define TOK_IGUAL 314
+#define TOK_SALTO 315
 
 /* Value type.  */
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
@@ -181,72 +175,9 @@ union YYSTYPE
 {
 #line 8 "calc.y"
 
+    char *entrada;
 
-    char *mkdisk;
-    char *rmdisk;
-    char *fdisk;
-    char *mount;
-    char *unmount;
-    char *mkfs;
-    char *login;
-    char *logout;
-    char *mkgrp;
-    char *rmgrp;
-    char *mkusr;
-    char *rmusr;
-    char *chmod;
-    char *touch;
-    char *mkdir;
-    char *rm;
-    char *edit;
-    char *ren;
-    char *cp;
-    char *mv;
-    char *find;
-    char *chown;
-    char *chgrp;
-    char *recovery;
-    char *loss;
-    char *exec;
-    char *size;
-    char *path;
-    char *name;
-    char *id;
-    char *usr;
-    char *pwd;
-    char *grp;
-    char *ugo;
-    char *cat;
-    char *filen;
-    char *stdin;
-    char *cont;
-    char *dest;
-    char *f;
-    char *u;
-    char *type;
-    char *delete;
-    char *fs;
-    char *r;
-    char *p;
-    char *add;
-    char *interrogacion;
-    char *cerradura;
-    char *numero;
-    char *ajuste;
-    char *ruta;
-    char *unidades;
-    char *tipo;
-    char *nombre;
-    char *capacidad;
-    char *sistema;
-    char *permisos;
-    char *identificador;
-    struct NodoParametro *paramNode;
-    struct NodoComando *comandNode;
-    struct ListaComandos *comandList;
-    struct ListaParametros *paramList;
-
-#line 250 "y.tab.h"
+#line 181 "y.tab.h"
 
 };
 typedef union YYSTYPE YYSTYPE;
